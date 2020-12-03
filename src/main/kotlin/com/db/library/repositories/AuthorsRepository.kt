@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface AuthorsRepository: JpaRepository<Author, Int> {
+    fun findAllByFirstName(firstName: String)
+    fun findAllByFirstNameAndLastName(firstName: String, lastName: String)
 }
