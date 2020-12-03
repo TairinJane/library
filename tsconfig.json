@@ -22,7 +22,7 @@
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "baseUrl": "./ui/@types/*",
+    "baseUrl": "./ui",
     "preserveConstEnums": true,
     "downlevelIteration": true
   },
