@@ -1,23 +1,23 @@
-import './index.css';
+import './index.scss';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Route, Switch } from 'react-router';
-import { BooksPage } from './books/books-page';
-import { Header } from './header/header';
+import { BooksPage } from './components/books/books-page';
+import { NavBar } from './components/nav-bar/nav-bar';
+import { MainContent } from './components/containers/main-content';
 
 const App = () => (
-  <>
-    <Header />
-    <BrowserRouter basename="/">
+  <BrowserRouter basename="/">
+    <NavBar />
+    <MainContent>
       <Switch>
         <Route exact path="/" component={BooksPage} />
-        {/*<Route exact path="/" render={() => <div>Main page</div>} />*/}
         <Route render={() => <div>No such page</div>} />
       </Switch>
-    </BrowserRouter>
-  </>
+    </MainContent>
+  </BrowserRouter>
 );
 
 ReactDOM.render(<App />, document.getElementById('root'));

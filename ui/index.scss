@@ -2,10 +2,12 @@
 @import "~@blueprintjs/core/lib/css/blueprint.css";
 @import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
 
-.flex-row {
-    display: flex;
+$nav-bar-width: 200px;
+
+.nav-bar {
+  width: $nav-bar-width;
 }
 
-.flex-row__m > * {
-    margin: 5px;
+.main-content {
+  margin-left: $nav-bar-width;
 }
