@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 
 node_modules
+/src/main/resources/static/_assets/
 
 ### STS ###
 .apt_generated

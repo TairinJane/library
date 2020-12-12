@@ -1,14 +1,19 @@
 const path = require('path');
 const webpack = require('webpack');
-const miniCss = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const _build = './src/main/resources/static';
+const _build = './src/main/resources/static/_assets';
+
+const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
-  entry: './ui/index.tsx',
+  context: path.resolve(__dirname, 'ui'),
+  entry: './index.tsx',
   mode: 'development',
   output: {
-    filename: 'main.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, _build),
     publicPath: '/',
   },
@@ -16,37 +21,34 @@ module.exports = {
     rules: [
       {
         test: /\.(s*)css$/,
-        use: [miniCss.loader, 'css-loader', 'sass-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
+      {
+        test: /\.js(x*)$/,
         exclude: /node_modules/,
-      },
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
-        options: { presets: ['@babel/env'] },
-      },
-      {
-        test: /\.(ttf|eot|svg)$/,
         use: {
-          loader: 'file-loader',
+          loader: 'babel-loader',
           options: {
-            name: 'fonts/[hash].[ext]',
+            presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
       },
       {
-        test: /\.(woff|woff2)$/,
+        test: /\.ts(x*)$/,
+        exclude: /node_modules/,
         use: {
-          loader: 'url-loader',
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
+          },
+        },
+      },
+      {
+        test: /\.(ttf|eot|svg|woff|woff2)$/,
+        use: {
+          loader: 'file-loader',
           options: {
             name: 'fonts/[hash].[ext]',
-            limit: 5000,
-            mimetype: 'application/font-woff',
           },
         },
       },
@@ -59,16 +61,18 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, _build),
     port: 3000,
-    hotOnly: true,
+    hotOnly: isDev,
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development'),
+      'process.env': JSON.stringify({}),
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new miniCss({
-      filename: 'style.css',
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
     }),
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({ template: './index.html' }),
   ],
-  devtool: 'source-map',
+  devtool: isDev ? 'eval-cheap-source-map' : false,
 };
