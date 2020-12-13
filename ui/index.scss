@@ -4,10 +4,14 @@
 
 $nav-bar-width: 200px;
 
+#root {
+  display: flex;
+}
+
 .nav-bar {
   width: $nav-bar-width;
 }
 
 .main-content {
-  margin-left: $nav-bar-width;
+  flex-grow: 1;
 }
