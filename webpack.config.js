@@ -14,8 +14,9 @@ module.exports = {
   mode: 'development',
   output: {
     filename: '[name].js',
+    chunkFilename: `[name].js`,
     path: path.resolve(__dirname, _build),
-    publicPath: '/',
+    publicPath: '/_assets/',
   },
   module: {
     rules: [
