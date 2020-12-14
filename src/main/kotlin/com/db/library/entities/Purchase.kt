@@ -12,7 +12,7 @@ class Purchase(
         var supplier: String,
         var purchaseDate: LocalDate,
         var deliveryDate: LocalDate,
-        @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchase")
+        @OneToMany(fetch = FetchType.LAZY)
         @JoinColumn(name = "purchase_id")
         var books: List<PurchaseBook>
 ) {
