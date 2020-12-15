@@ -9,6 +9,7 @@ export const NavBar = () => {
         <ListItemLink text={'Home'} to={'/'} />
         <ListItemLink text={'Books Search'} to={'/search/books'} />
         <ListItemLink text={'Readers Search'} to={'/search/readers'} />
+        <ListItemLink text={'Lend a Book'} to={'/lend'} />
       </List>
     </Drawer>
   );
