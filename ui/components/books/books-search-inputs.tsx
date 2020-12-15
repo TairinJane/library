@@ -11,7 +11,8 @@ export const BooksSearchInputs = () => {
   const [title, setTitle] = useState('');
 
   const handleSearch = useCallback(() => {
-    dispatch(BooksThunks.findBooks(title, authorFirstName, authorLastName));
+    if (title || authorFirstName || authorLastName)
+      dispatch(BooksThunks.findBooks(title, authorFirstName, authorLastName));
   }, [title, authorFirstName, authorLastName]);
 
   return (

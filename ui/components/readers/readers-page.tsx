@@ -13,7 +13,7 @@ export const ReadersPage = () => {
   const [firstName, setFirstName] = useState('');
 
   const handleSearch = useCallback(() => {
-    dispatch(ReadersThunks.findReaders(firstName, lastName));
+    if (firstName || lastName) dispatch(ReadersThunks.findReaders(firstName, lastName));
   }, [firstName, lastName]);
 
   return (
