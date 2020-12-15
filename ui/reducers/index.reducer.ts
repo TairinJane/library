@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { TStore } from '../store/store';
-import { booksReducer } from './books.reducer';
+import { searchReducer } from './searchReducer';
 
 const rootReducer = combineReducers<TStore>({
-  search: booksReducer,
+  search: searchReducer,
 });
 
 export default rootReducer;

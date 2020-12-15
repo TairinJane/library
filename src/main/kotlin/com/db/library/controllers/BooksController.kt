@@ -11,12 +11,9 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class BooksController(private val booksRepository: BooksRepository) {
 
-    @GetMapping("/hello")
-    fun hello() = "hello library"
-
     @GetMapping("/books")
-    fun books(@RequestParam title: String): List<Book> {
-        println("request: $title")
-        return booksRepository.findAllByTitleIsLike(title)
+    fun books(@RequestParam title: String, @RequestParam authorFirstName: String, @RequestParam authorLastName: String): List<Book> {
+        println("request: $title $authorFirstName $authorLastName")
+        return booksRepository.findAllByTitleContainingIgnoreCase(title)
     }
 }

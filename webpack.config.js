@@ -73,6 +73,7 @@ module.exports = {
     contentBase: path.join(__dirname, _build),
     port: 3000,
     hotOnly: isDev,
+    historyApiFallback: isDev,
   },
   plugins: [
     new webpack.DefinePlugin({

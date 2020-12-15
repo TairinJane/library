@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import { Button, InputGroup } from '@blueprintjs/core';
 import { Grid } from '@material-ui/core';
-import { Column, Table } from '@blueprintjs/table';
 import { useDispatch, useSelector } from 'react-redux';
 import { TBook, TStore } from '../../store/store';
-import { SearchThunks } from '../../actions/books.thunks';
+import { BooksThunks } from '../../actions/books.thunks';
+import { BooksTable } from './books-table';
 
 export const BooksPage = () => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ export const BooksPage = () => {
   const [title, setTitle] = useState('');
 
   const handleSearch = useCallback(() => {
-    dispatch(SearchThunks.getBooks(title));
+    dispatch(BooksThunks.findBooks(title));
   }, [title]);
 
   return (
@@ -40,14 +40,7 @@ export const BooksPage = () => {
           <Button icon={'search'} intent={'primary'} onClick={handleSearch} />
         </Grid>
       </Grid>
-      {!!books?.length && (
-        <Table numRows={books?.length} enableColumnResizing={false} enableRowResizing={false} className="offset-top-24">
-          <Column name={'Title'} />
-          <Column name={'Author'} />
-          <Column name={'Amount'} />
-          <Column name={'Available'} />
-        </Table>
-      )}
+      {!!books?.length && <BooksTable books={books} />}
     </>
   );
 };

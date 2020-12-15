@@ -93,6 +93,7 @@ export type TEvent = {
 
 export type TSearch = {
   books?: TBook[];
+  readers?: TReader[];
 };
 
 export const searchStoreDefaults: TSearch = {};
