@@ -98,10 +98,19 @@ export type TSearch = {
 
 export const searchStoreDefaults: TSearch = {};
 
+export type TLend = {
+  reader?: TReader;
+  book?: TBook;
+};
+
+export const lendDefaults: TLend = {};
+
 export type TStore = {
   search: TSearch;
+  lend: TLend;
 };
 
 export const storeDefaults: TStore = {
   search: searchStoreDefaults,
+  lend: lendDefaults,
 };

@@ -43,7 +43,7 @@ export const ReadersPage = () => {
         </Grid>
       </Grid>
       {!!readers?.length ? (
-        <ReadersTable readers={readers} />
+        <ReadersTable readers={readers} enableLend />
       ) : (
         <div className="offset-top-24 text-center">No results</div>
       )}
