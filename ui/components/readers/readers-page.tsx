@@ -42,7 +42,11 @@ export const ReadersPage = () => {
           <Button icon={'search'} intent={'primary'} onClick={handleSearch} />
         </Grid>
       </Grid>
-      {!!readers?.length && <ReadersTable readers={readers} />}
+      {!!readers?.length ? (
+        <ReadersTable readers={readers} />
+      ) : (
+        <div className="offset-top-24 text-center">No results</div>
+      )}
     </>
   );
 };

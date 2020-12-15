@@ -40,7 +40,7 @@ export const BooksPage = () => {
           <Button icon={'search'} intent={'primary'} onClick={handleSearch} />
         </Grid>
       </Grid>
-      {!!books?.length && <BooksTable books={books} />}
+      {!!books?.length ? <BooksTable books={books} /> : <div className="offset-top-24 text-center">No results</div>}
     </>
   );
 };
