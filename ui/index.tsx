@@ -21,8 +21,8 @@ const App = () => {
         <MainContent>
           <Container>
             <Switch>
-              <Route exact path="/books" component={BooksPage} />
-              <Route exact path="/readers" component={ReadersPage} />
+              <Route exact path="/search/books" component={BooksPage} />
+              <Route exact path="/search/readers" component={ReadersPage} />
               <Route render={() => <div>No such page</div>} />
             </Switch>
           </Container>

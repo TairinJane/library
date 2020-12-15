@@ -7,8 +7,8 @@ export const NavBar = () => {
     <Drawer variant={'permanent'} anchor={'left'} className="nav-bar" classes={{ paper: 'nav-bar' }}>
       <List>
         <ListItemLink text={'Home'} to={'/'} />
-        <ListItemLink text={'Books'} to={'/books'} />
-        <ListItemLink text={'Readers'} to={'/readers'} />
+        <ListItemLink text={'Books Search'} to={'/search/books'} />
+        <ListItemLink text={'Readers Search'} to={'/search/readers'} />
       </List>
     </Drawer>
   );
