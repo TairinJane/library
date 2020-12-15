@@ -12,8 +12,16 @@ import org.springframework.web.bind.annotation.RestController
 class BooksController(private val booksRepository: BooksRepository) {
 
     @GetMapping("/books")
-    fun books(@RequestParam title: String, @RequestParam authorFirstName: String, @RequestParam authorLastName: String): List<Book> {
+    fun books(@RequestParam(defaultValue = "") title: String, @RequestParam(defaultValue = "") authorFirstName: String, @RequestParam(defaultValue = "") authorLastName: String): List<Book> {
         println("request: $title $authorFirstName $authorLastName")
-        return booksRepository.findAllByTitleContainingIgnoreCase(title)
+        return if (authorFirstName.isNotEmpty() && authorLastName.isNotEmpty())
+            booksRepository.findAllByAuthor(authorLastName, authorFirstName)
+        else if (authorFirstName.isNotEmpty())
+            booksRepository.findAllByAuthorLastName(authorFirstName)
+        else if (authorLastName.isNotEmpty())
+            booksRepository.findAllByAuthorFirstName(authorLastName)
+        else if (title.isNotEmpty())
+            booksRepository.findAllByTitleContainingIgnoreCase(title)
+        else emptyList()
     }
 }
