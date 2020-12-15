@@ -14,9 +14,8 @@ module.exports = {
   mode: 'development',
   output: {
     filename: '[name].js',
-    chunkFilename: `[name].js`,
     path: path.resolve(__dirname, _build),
-    publicPath: '/_assets/',
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -40,7 +39,18 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  targets: {
+                    esmodules: true,
+                  },
+                },
+              ],
+              '@babel/preset-react',
+              '@babel/preset-typescript',
+            ],
           },
         },
       },

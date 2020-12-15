@@ -90,3 +90,17 @@ export type TEvent = {
   eventDate: Date;
   eventPlace: string;
 };
+
+export type TSearch = {
+  books?: TBook[];
+};
+
+export const searchStoreDefaults: TSearch = {};
+
+export type TStore = {
+  search: TSearch;
+};
+
+export const storeDefaults: TStore = {
+  search: searchStoreDefaults,
+};

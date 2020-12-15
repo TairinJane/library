@@ -15,8 +15,8 @@ class Author(
         var patronymic: String,
         var birthDate: LocalDate,
         var deathDate: LocalDate,
-        @ManyToMany(fetch = FetchType.LAZY, mappedBy = "authors")
-        var books: List<Book>
+       /* @ManyToMany(fetch = FetchType.LAZY, mappedBy = "authors")
+        var books: List<Book>*/
 ) {
     @Id
     @Column(name = "author_id")
