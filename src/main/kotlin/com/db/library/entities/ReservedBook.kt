@@ -16,8 +16,8 @@ class ReservedBook(
         @JoinColumn(name = "employee_id")
         var employee: Employee,
         var reservationDate: LocalDate,
-) {
-    @Id
-    @Column(name = "reservation_id")
-    var id: Int = 0
-}
+        @Id
+        @Column(name = "reservation_id")
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Int = 0
+)

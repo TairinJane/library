@@ -14,9 +14,9 @@ class Purchase(
         var deliveryDate: LocalDate,
         @OneToMany(fetch = FetchType.LAZY)
         @JoinColumn(name = "purchase_id")
-        var books: List<PurchaseBook>
-) {
-    @Id
-    @Column(name = "purchase_id")
-    var id: Int = 0
-}
+        var books: List<PurchaseBook>,
+        @Id
+        @Column(name = "purchase_id")
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Int = 0
+)

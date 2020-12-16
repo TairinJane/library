@@ -11,9 +11,9 @@ class Event(
         @JoinColumn(name = "employee_id")
         var employee: Employee,
         var eventDate: LocalDate,
-        var eventPlace: String
-) {
-    @Id
-    @Column(name = "event_id")
-    var id: Int = 0
-}
+        var eventPlace: String,
+        @Id
+        @Column(name = "event_id")
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Int = 0
+)

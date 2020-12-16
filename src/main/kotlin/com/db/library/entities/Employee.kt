@@ -1,10 +1,7 @@
 package com.db.library.entities
 
 import java.time.LocalDate
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 import javax.validation.constraints.Size
 
 @Entity
@@ -18,9 +15,11 @@ class Employee(
         var patronymic: String,
         var birthDate: LocalDate,
         var startDate: LocalDate,
-        var endDate: LocalDate
+        var endDate: LocalDate,
+        @Id
+        @Column(name = "employee_id")
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Int = 0
 ) {
-    @Id
-    @Column(name = "employee_id")
-    var id: Int = 0
+
 }

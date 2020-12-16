@@ -14,8 +14,8 @@ class BookRequest(
         @JoinColumn(name = "reader_id")
         var reader: Reader,
         var requestDate: LocalDate,
-) {
-    @Id
-    @Column(name = "request_id")
-    var id: Int = 0
-}
+        @Id
+        @Column(name = "request_id")
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Int = 0
+)

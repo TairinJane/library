@@ -10,9 +10,9 @@ class Reader(
         var lastName: String,
         var patronymic: String,
         var birthDate: LocalDate,
-        var registrationDate: LocalDate
-) {
-    @Id
-    @Column(name = "reader_id")
-    var id: Int = 0
-}
+        var registrationDate: LocalDate,
+        @Id
+        @Column(name = "reader_id")
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Int = 0
+)

@@ -23,9 +23,9 @@ class Book(
                 name = "books_authors",
                 joinColumns = [JoinColumn(name = "book_id")],
                 inverseJoinColumns = [JoinColumn(name = "author_id")])
-        var authors: List<Author>
-) {
-    @Id
-    @Column(name = "book_id")
-    var id: Int = 0
-}
+        var authors: List<Author>,
+        @Id
+        @Column(name = "book_id")
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Int = 0
+)

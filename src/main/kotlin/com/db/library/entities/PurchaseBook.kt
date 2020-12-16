@@ -13,9 +13,9 @@ class PurchaseBook(
         @Size(min = 13, max = 13)
         var ISBN: String,
         @Min(1)
-        var amount: Int
-) {
-    @Id
-    @Column(name = "purchase_book_id")
-    var id: Int = 0
-}
+        var amount: Int,
+        @Id
+        @Column(name = "purchase_book_id")
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Int = 0
+)
