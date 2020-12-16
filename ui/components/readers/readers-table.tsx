@@ -1,44 +1,39 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { TReader } from '../../store/store';
-import { Cell, Column, Table } from '@blueprintjs/table';
-import { Button } from '@blueprintjs/core';
-import { useDispatch } from 'react-redux';
-import { LendActions } from '../../actions/lend.actions';
-import { useHistory } from 'react-router';
+import { Cell, Column, SelectionModes, Table } from '@blueprintjs/table';
+import { IFocusedCellCoordinates } from '@blueprintjs/table/lib/esm/common/cell';
 
 type Props = {
   readers?: TReader[];
-  enableLend?: boolean;
+  onRowClick?: (rowIndex: number) => void;
 };
 
-export const ReadersTable = ({ readers, enableLend = false }: Props) => {
-  const dispatch = useDispatch();
-  const history = useHistory();
-
+export const ReadersTable = ({ readers, onRowClick }: Props) => {
   const nameCellRenderer = (rowIndex: number) => {
     const reader = readers[rowIndex];
-    return <Cell>{`${reader.firstName} ${reader.lastName} ${reader.patronymic ?? ''}`}</Cell>;
+    const name = `${reader.firstName} ${reader.lastName} ${reader.patronymic ?? ''}`;
+    return <Cell>{name}</Cell>;
   };
-  const birthDateCellRenderer = (rowIndex: number) => <Cell>{readers[rowIndex]?.birthDate}</Cell>;
-  const registrationRenderer = (rowIndex: number) => <Cell>{readers[rowIndex]?.registrationDate}</Cell>;
-  const lendRenderer = (rowIndex: number) => {
-    const lendBook = (reader: TReader) => {
-      dispatch(LendActions.pickReader(reader));
-      history.push('/lend');
-    };
-    return (
-      <Cell>
-        <Button onClick={() => lendBook(readers[rowIndex])}>Lend a Book</Button>
-      </Cell>
-    );
-  };
+  const birthDateCellRenderer = (rowIndex: number) => <Cell interactive>{readers[rowIndex]?.birthDate}</Cell>;
+  const registrationRenderer = (rowIndex: number) => <Cell interactive>{readers[rowIndex]?.registrationDate}</Cell>;
+
+  const onFocus = useCallback((focusedCell: IFocusedCellCoordinates) => {
+    console.log(JSON.stringify(focusedCell));
+    onRowClick(focusedCell.row);
+  }, []);
 
   return (
-    <Table numRows={readers?.length} className="offset-top-24" defaultRowHeight={35} enableRowResizing={false}>
+    <Table
+      numRows={readers?.length}
+      className="offset-top-24"
+      enableRowResizing={false}
+      enableFocusedCell={!!onRowClick}
+      onFocusedCell={!!onRowClick ? onFocus : null}
+      selectionModes={SelectionModes.ROWS_AND_CELLS}
+    >
       <Column name={'Name'} cellRenderer={nameCellRenderer} />
       <Column name={'Birth Date'} cellRenderer={birthDateCellRenderer} />
       <Column name={'Registration Date'} cellRenderer={registrationRenderer} />
-      {enableLend && <Column name={'Lend a Book'} cellRenderer={lendRenderer} />}
     </Table>
   );
 };

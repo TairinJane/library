@@ -1,18 +1,18 @@
 package com.db.library.controllers
 
+import com.db.library.entities.BorrowedBook
 import com.db.library.entities.Reader
+import com.db.library.repositories.BorrowedBooksRepository
 import com.db.library.repositories.ReadersRepository
-import org.springframework.web.bind.annotation.CrossOrigin
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin
 @RestController
-class ReadersController(private val readersRepository: ReadersRepository) {
+@RequestMapping("/api/readers")
+class ReadersController(private val readersRepository: ReadersRepository, private val borrowedBooksRepository: BorrowedBooksRepository) {
 
     //familiya == first name in bd (should be last name)
-    @GetMapping("/readers")
+    @GetMapping
     fun readers(@RequestParam(defaultValue = "") firstName: String, @RequestParam(defaultValue = "") lastName: String): List<Reader> {
         println("request: $firstName $lastName")
         return if (firstName.isNotEmpty() && lastName.isNotEmpty())
@@ -22,5 +22,17 @@ class ReadersController(private val readersRepository: ReadersRepository) {
         else if (firstName.isNotEmpty())
             readersRepository.findAllByLastName(firstName)
         else emptyList()
+    }
+
+    @GetMapping("/{id}/history")
+    fun history(@PathVariable id: Int): List<BorrowedBook> {
+        println("history for $id")
+        return borrowedBooksRepository.findAllByReaderId(id)
+    }
+
+    @GetMapping("/{id}/hands")
+    fun hands(@PathVariable id: Int): List<BorrowedBook> {
+        println("hands for $id")
+        return borrowedBooksRepository.findAllByReaderIdAndReturnDateIsNull(id)
     }
 }
