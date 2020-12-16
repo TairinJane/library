@@ -15,6 +15,12 @@ export const lendReducer = (state = stateSearchDefaults, action: TLendActions): 
       case getType(LendActions.pickBook):
         draft.book = action.payload;
         break;
+      case getType(LendActions.lendBook.request):
+        break;
+      case getType(LendActions.lendBook.success):
+        break;
+      case getType(LendActions.lendBook.failure):
+        break;
     }
   });
 };

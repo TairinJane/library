@@ -1,5 +1,7 @@
 package com.db.library.entities
 
+import org.hibernate.annotations.Generated
+import org.springframework.lang.Nullable
 import java.time.LocalDate
 import javax.persistence.*
 
@@ -15,11 +17,12 @@ class BorrowedBook(
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "employee_id")
         var employee: Employee,
-        var borrowDate: LocalDate,
-        var dueDate: LocalDate,
-        var returnDate: LocalDate
-) {
-    @Id
-    @Column(name = "borrow_id")
-    var id: Int = 0
-}
+        var borrowDate: LocalDate = LocalDate.now(),
+        var dueDate: LocalDate = LocalDate.now().plusDays(10),
+        @Nullable
+        var returnDate: LocalDate? = null,
+        @Id
+        @Column(name = "borrow_id")
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Int = 0
+)
