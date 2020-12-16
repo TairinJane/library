@@ -15,13 +15,14 @@ export const BooksTable = ({ books }: Props) => {
     return <Cell>{authors.join(', ')}</Cell>;
   };
   const amountRenderer = (rowIndex: number) => <Cell>{books[rowIndex]?.amount}</Cell>;
+  const availableRenderer = (rowIndex: number) => <Cell>{books[rowIndex]?.available}</Cell>;
 
   return (
-    <Table numRows={books?.length} enableRowResizing={false} className="offset-top-24">
+    <Table numRows={books?.length} defaultRowHeight={35} enableRowResizing={false} className="offset-top-24">
       <Column name={'Title'} cellRenderer={titleCellRenderer} />
       <Column name={'Author'} cellRenderer={authorCellRenderer} />
       <Column name={'Amount'} cellRenderer={amountRenderer} />
-      <Column name={'Available'} />
+      <Column name={'Available'} cellRenderer={availableRenderer} />
     </Table>
   );
 };

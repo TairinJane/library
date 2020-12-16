@@ -16,6 +16,7 @@ export type TBook = {
   amount: number;
   department: number;
   authors: TAuthor[];
+  available: number;
 };
 
 export type TReader = {
@@ -105,12 +106,20 @@ export type TLend = {
 
 export const lendDefaults: TLend = {};
 
+export type TReadersInfo = {
+  [id: number]: TReader;
+};
+
+export const readersInfoDefaults: TReadersInfo = {};
+
 export type TStore = {
   search: TSearch;
   lend: TLend;
+  readersInfo: TReadersInfo;
 };
 
 export const storeDefaults: TStore = {
   search: searchStoreDefaults,
   lend: lendDefaults,
+  readersInfo: readersInfoDefaults,
 };
