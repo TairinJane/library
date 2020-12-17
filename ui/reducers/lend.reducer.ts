@@ -9,18 +9,21 @@ type TLendActions = ActionType<typeof LendActions>;
 export const lendReducer = (state = stateSearchDefaults, action: TLendActions): TLend => {
   return produce(state, draft => {
     switch (action.type) {
-      case getType(LendActions.pickReader):
-        draft.reader = action.payload;
-        break;
-      case getType(LendActions.pickBook):
-        draft.book = action.payload;
-        break;
       case getType(LendActions.lendBook.request):
+        draft = { ...action.payload };
         break;
       case getType(LendActions.lendBook.success):
+        draft.bookId = action.payload.book.id;
+        draft.readerId = action.payload.reader.id;
+        draft.isSuccess = true;
         break;
       case getType(LendActions.lendBook.failure):
+        draft.bookId = action.payload.bookId;
+        draft.readerId = action.payload.readerId;
+        draft.isSuccess = false;
         break;
+      case getType(LendActions.clearLendInfo):
+        draft = { isSuccess: false };
     }
   });
 };

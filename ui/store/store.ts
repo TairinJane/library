@@ -1,3 +1,5 @@
+import { TLoadable } from '../utils/state.utils';
+
 export type TAuthor = {
   id: number;
   firstName: string;
@@ -100,11 +102,12 @@ export type TSearch = {
 export const searchStoreDefaults: TSearch = {};
 
 export type TLend = {
-  reader?: TReader;
-  book?: TBook;
+  readerId?: number;
+  bookId?: number;
+  isSuccess?: boolean;
 };
 
-export const lendDefaults: TLend = {};
+export const lendDefaults: TLend = { isSuccess: false };
 
 export type TReaderInfo = {
   reader?: TReader;

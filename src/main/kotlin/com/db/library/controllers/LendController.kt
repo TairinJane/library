@@ -20,13 +20,14 @@ class LendController(private val readersRepository: ReadersRepository,
                      private val employeesRepository: EmployeesRepository) {
 
     @GetMapping
-    fun lendBook(@RequestParam bookId: Int, @RequestParam readerId: Int, @RequestParam employeeId: Int) {
+    fun lendBook(@RequestParam bookId: Int, @RequestParam readerId: Int, @RequestParam employeeId: Int): BorrowedBook {
         try {
             val book = booksRepository.getOne(bookId)
             val reader = readersRepository.getOne(readerId)
             val employee = employeesRepository.getOne(employeeId)
-            borrowedBooksRepository.save(BorrowedBook(book, reader, employee))
+            val borrowedBook = borrowedBooksRepository.save(BorrowedBook(book, reader, employee))
             println("success: $bookId $readerId $employeeId")
+            return borrowedBook
         } catch (e: Exception) {
             throw ResponseStatusException(HttpStatus.BAD_REQUEST)
         }

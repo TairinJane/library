@@ -3,9 +3,13 @@ import { BookActions } from '../actions/books.actions';
 import { TSearch } from '../store/store';
 import produce from 'immer';
 import { ReadersActions } from '../actions/readers.actions';
+import { SearchActions } from '../actions/search.actions';
 
 const stateSearchDefaults: TSearch = {};
-type TSearchActions = ActionType<typeof BookActions> | ActionType<typeof ReadersActions>;
+type TSearchActions =
+  | ActionType<typeof BookActions>
+  | ActionType<typeof ReadersActions>
+  | ActionType<typeof SearchActions>;
 
 export const searchReducer = (state = stateSearchDefaults, action: TSearchActions): TSearch => {
   return produce(state, draft => {
@@ -13,7 +17,6 @@ export const searchReducer = (state = stateSearchDefaults, action: TSearchAction
       case getType(BookActions.findBooks.request):
         break;
       case getType(BookActions.findBooks.success):
-        console.log('reducer books:', action.payload?.length);
         draft.books = action.payload;
         break;
       case getType(BookActions.findBooks.failure):
@@ -21,11 +24,13 @@ export const searchReducer = (state = stateSearchDefaults, action: TSearchAction
       case getType(ReadersActions.findReaders.request):
         break;
       case getType(ReadersActions.findReaders.success):
-        console.log('reducer readers:', action.payload?.length);
         draft.readers = action.payload;
         break;
       case getType(ReadersActions.findReaders.failure):
         break;
+      case getType(SearchActions.clearSearch):
+        draft.readers = [];
+        draft.books = [];
     }
   });
 };

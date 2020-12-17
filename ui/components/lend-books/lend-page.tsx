@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TBook, TReader, TStore } from '../../store/store';
+import { TBook, TReader, TSearch, TStore } from '../../store/store';
 import { BooksTable } from '../books/books-table';
 import { BooksSearchInputs } from '../books/books-search-inputs';
 import { ReadersSearchControls } from '../readers/search/readers-search-controls';
@@ -8,15 +8,27 @@ import { ReadersTable } from '../readers/readers-table';
 import { Grid } from '@material-ui/core';
 import { Button } from '@blueprintjs/core';
 import { LendThunks } from '../../actions/lend.thunks';
+import { SearchActions } from '../../actions/search.actions';
+import { useHistory } from 'react-router';
+import { LendActions } from '../../actions/lend.actions';
 
 export const LendPage = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
-  const readers = useSelector<TStore, TReader[]>(store => store.search.readers);
-  const books = useSelector<TStore, TBook[]>(store => store.search.books);
+  const { readers, books } = useSelector<TStore, TSearch>(store => store.search);
+  const isLendSuccess = useSelector<TStore, boolean>(store => store.lend?.isSuccess) || false;
 
   const [pickedReader, setPickedReader] = useState<TReader>();
   const [pickedBook, setPickedBook] = useState<TBook>();
+
+  useEffect(() => {
+    if (isLendSuccess) {
+      dispatch(SearchActions.clearSearch());
+      dispatch(LendActions.clearLendInfo());
+      history.push('/');
+    }
+  }, [isLendSuccess]);
 
   const onReaderSelect = useCallback(
     (rowIndex: number) => {

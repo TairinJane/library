@@ -7,7 +7,7 @@ const lendBook = (readerId: number, bookId: number, employeeId = 30) => {
     const payload = { readerId, bookId, employeeId };
     dispatch(LendActions.lendBook.request(payload));
     return LendApi.lendBook(readerId, bookId, employeeId)
-      .then(() => dispatch(LendActions.lendBook.success(payload)))
+      .then(json => dispatch(LendActions.lendBook.success(json, payload)))
       .catch(() => dispatch(LendActions.lendBook.failure(payload)));
   };
 };

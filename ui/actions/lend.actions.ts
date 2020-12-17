@@ -1,8 +1,5 @@
-import { TBook, TBorrowedBook, TReader } from '../store/store';
+import { TBorrowedBook } from '../store/store';
 import { createAction, createAsyncAction } from 'typesafe-actions';
-
-const pickReader = createAction('LEND/PICK_READER')<TReader>();
-const pickBook = createAction('LEND/PICK_Book')<TBook>();
 
 type TLendPayload = {
   readerId: number;
@@ -12,7 +9,7 @@ type TLendPayload = {
 
 const lendBook = createAsyncAction('LEND/LEND_REQ', 'LEND/LEND_SUCCESS', 'LEND/LEND_ERROR')<
   TLendPayload,
-  TLendPayload,
+  [TBorrowedBook, TLendPayload],
   TLendPayload
 >();
 
@@ -22,9 +19,10 @@ const returnBook = createAsyncAction('LEND/RETURN_REQ', 'LEND/RETURN_SUCCESS', '
   number
 >();
 
+const clearLendInfo = createAction('LEND/CLEAR_INFO')();
+
 export const LendActions = {
-  pickReader,
-  pickBook,
   lendBook,
   returnBook,
+  clearLendInfo,
 };

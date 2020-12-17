@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { TStore } from '../store/store';
-import { searchReducer } from './searchReducer';
+import { searchReducer } from './search.reducer';
 import { lendReducer } from './lend.reducer';
 import { readersInfoReducer } from './readers-info.reducer';
 
