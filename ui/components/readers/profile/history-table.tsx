@@ -1,23 +1,24 @@
 import React, { useCallback } from 'react';
-import { TBook } from '../../store/store';
 import { Cell, Column, SelectionModes, Table } from '@blueprintjs/table';
 import { IFocusedCellCoordinates } from '@blueprintjs/table/lib/esm/common/cell';
+import { TBorrowedBook } from '../../../store/store';
 
 type Props = {
-  books?: TBook[];
+  books?: TBorrowedBook[];
   onRowClick?: (rowIndex: number) => void;
 };
 
-export const BooksTable = ({ books, onRowClick }: Props) => {
-  const titleCellRenderer = (rowIndex: number) => <Cell>{books[rowIndex]?.title}</Cell>;
+export const HistoryTable = ({ books, onRowClick }: Props) => {
+  const titleCellRenderer = (rowIndex: number) => <Cell>{books[rowIndex]?.book.title}</Cell>;
   const authorCellRenderer = (rowIndex: number) => {
-    const authors = books[rowIndex]?.authors.map(
+    const authors = books[rowIndex]?.book.authors.map(
       author => `${author.firstName} ${author.lastName[0]}. ${author.patronymic ? author.patronymic[0] + '.' : ''}`,
     );
     return <Cell>{authors.join(', ')}</Cell>;
   };
-  const amountRenderer = (rowIndex: number) => <Cell>{books[rowIndex]?.amount}</Cell>;
-  const availableRenderer = (rowIndex: number) => <Cell>{books[rowIndex]?.available}</Cell>;
+  const borrowRenderer = (rowIndex: number) => <Cell>{books[rowIndex]?.borrowDate}</Cell>;
+  const dueRenderer = (rowIndex: number) => <Cell>{books[rowIndex]?.dueDate}</Cell>;
+  const returnRenderer = (rowIndex: number) => <Cell>{books[rowIndex]?.returnDate ?? ''}</Cell>;
 
   const onFocus = useCallback(
     (focusedCell: IFocusedCellCoordinates) => {
@@ -37,8 +38,9 @@ export const BooksTable = ({ books, onRowClick }: Props) => {
     >
       <Column name={'Title'} cellRenderer={titleCellRenderer} />
       <Column name={'Author'} cellRenderer={authorCellRenderer} />
-      <Column name={'Amount'} cellRenderer={amountRenderer} />
-      <Column name={'Available'} cellRenderer={availableRenderer} />
+      <Column name={'Borrow Date'} cellRenderer={borrowRenderer} />
+      <Column name={'Due Date'} cellRenderer={dueRenderer} />
+      <Column name={'Return Date'} cellRenderer={returnRenderer} />
     </Table>
   );
 };

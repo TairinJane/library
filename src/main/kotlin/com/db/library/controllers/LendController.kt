@@ -8,6 +8,7 @@ import com.db.library.repositories.ReadersRepository
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
+import java.time.LocalDate
 
 
 @CrossOrigin
@@ -26,6 +27,19 @@ class LendController(private val readersRepository: ReadersRepository,
             val employee = employeesRepository.getOne(employeeId)
             borrowedBooksRepository.save(BorrowedBook(book, reader, employee))
             println("success: $bookId $readerId $employeeId")
+        } catch (e: Exception) {
+            throw ResponseStatusException(HttpStatus.BAD_REQUEST)
+        }
+    }
+
+    @GetMapping("/{id}/return")
+    fun returnBook(@PathVariable id: Int): BorrowedBook {
+        try {
+            val book = borrowedBooksRepository.getOne(id)
+            book.returnDate = LocalDate.now()
+            borrowedBooksRepository.save(book)
+            println("returned book: $id")
+            return book
         } catch (e: Exception) {
             throw ResponseStatusException(HttpStatus.BAD_REQUEST)
         }

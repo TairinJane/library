@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { ReadersThunks } from '../../actions/readers.thunks';
+import { ReadersThunks } from '../../../actions/readers.thunks';
 import { useDispatch } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import { Button, InputGroup } from '@blueprintjs/core';

@@ -106,16 +106,21 @@ export type TLend = {
 
 export const lendDefaults: TLend = {};
 
-export type TReadersInfo = {
-  [id: number]: TReader;
+export type TReaderInfo = {
+  reader?: TReader;
+  history?: TBorrowedBook[];
 };
 
-export const readersInfoDefaults: TReadersInfo = {};
+export type TReadersProfiles = {
+  [id: number]: TReaderInfo;
+};
+
+export const readersInfoDefaults: TReadersProfiles = {};
 
 export type TStore = {
   search: TSearch;
   lend: TLend;
-  readersInfo: TReadersInfo;
+  readersInfo: TReadersProfiles;
 };
 
 export const storeDefaults: TStore = {

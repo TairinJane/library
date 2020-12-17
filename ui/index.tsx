@@ -10,9 +10,9 @@ import { MainContent } from './components/containers/main-content';
 import { Container } from '@material-ui/core';
 import { Provider } from 'react-redux';
 import { configureStore } from './store/configure.store';
-import { ReadersSearchPage } from './components/readers/readers-search-page';
+import { ReadersSearchPage } from './components/readers/search/readers-search-page';
 import { LendPage } from './components/lend-books/lend-page';
-import { ReaderPage } from './components/readers/reader-page';
+import { ReaderProfile } from './components/readers/profile/reader-profile';
 
 const App = () => {
   const store = configureStore();
@@ -26,7 +26,7 @@ const App = () => {
               <Route exact path="/search/books" component={BooksSearchPage} />
               <Route exact path="/search/readers" component={ReadersSearchPage} />
               <Route exact path="/lend" component={LendPage} />
-              <Route exact path="/reader/:id" component={ReaderPage} />
+              <Route exact path="/reader/:id" component={ReaderProfile} />
               <Route render={() => <div>No such page</div>} />
             </Switch>
           </Container>

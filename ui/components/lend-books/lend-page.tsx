@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { TBook, TReader, TStore } from '../../store/store';
 import { BooksTable } from '../books/books-table';
 import { BooksSearchInputs } from '../books/books-search-inputs';
-import { ReadersSearchControls } from '../readers/readers-search-controls';
+import { ReadersSearchControls } from '../readers/search/readers-search-controls';
 import { ReadersTable } from '../readers/readers-table';
 import { Grid } from '@material-ui/core';
 import { Button } from '@blueprintjs/core';

@@ -17,10 +17,12 @@ export const ReadersTable = ({ readers, onRowClick }: Props) => {
   const birthDateCellRenderer = (rowIndex: number) => <Cell interactive>{readers[rowIndex]?.birthDate}</Cell>;
   const registrationRenderer = (rowIndex: number) => <Cell interactive>{readers[rowIndex]?.registrationDate}</Cell>;
 
-  const onFocus = useCallback((focusedCell: IFocusedCellCoordinates) => {
-    console.log(JSON.stringify(focusedCell));
-    onRowClick(focusedCell.row);
-  }, []);
+  const onFocus = useCallback(
+    (focusedCell: IFocusedCellCoordinates) => {
+      onRowClick(focusedCell.row);
+    },
+    [onRowClick],
+  );
 
   return (
     <Table

@@ -4,7 +4,9 @@ import com.db.library.entities.BorrowedBook
 import com.db.library.entities.Reader
 import com.db.library.repositories.BorrowedBooksRepository
 import com.db.library.repositories.ReadersRepository
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.server.ResponseStatusException
 
 @CrossOrigin
 @RestController
@@ -22,6 +24,16 @@ class ReadersController(private val readersRepository: ReadersRepository, privat
         else if (firstName.isNotEmpty())
             readersRepository.findAllByLastName(firstName)
         else emptyList()
+    }
+
+    @GetMapping("/{id}")
+    fun reader(@PathVariable id: Int): Reader {
+        println("reader $id")
+        try {
+            return readersRepository.getOne(id)
+        } catch (e: Exception) {
+            throw ResponseStatusException(HttpStatus.BAD_REQUEST)
+        }
     }
 
     @GetMapping("/{id}/history")

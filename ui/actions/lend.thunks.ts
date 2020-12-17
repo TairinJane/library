@@ -12,6 +12,16 @@ const lendBook = (readerId: number, bookId: number, employeeId = 30) => {
   };
 };
 
+const returnBook = (bookId: number) => {
+  return (dispatch: Dispatch) => {
+    dispatch(LendActions.returnBook.request(bookId));
+    return LendApi.returnBook(bookId)
+      .then(json => dispatch(LendActions.returnBook.success(json, bookId)))
+      .catch(() => dispatch(LendActions.returnBook.failure(bookId)));
+  };
+};
+
 export const LendThunks = {
   lendBook,
+  returnBook,
 };
