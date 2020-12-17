@@ -15,7 +15,7 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, _build),
-    publicPath: '/',
+    publicPath: '/_assets',
   },
   module: {
     rules: [
@@ -84,7 +84,11 @@ module.exports = {
       filename: '[name].css',
     }),
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({ template: './index.html' }),
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      filename: '../../templates/index.html',
+      favicon: 'assets/book.ico',
+    }),
   ],
   devtool: isDev ? 'eval-cheap-source-map' : false,
 };
