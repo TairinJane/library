@@ -15,7 +15,14 @@ const returnBook = async (bookId: number): Promise<TBorrowedBook> => {
   return null;
 };
 
+const fetchDueBooks = async (): Promise<TBorrowedBook[]> => {
+  const resp = await fetch(toApiURL(`/lend/due`));
+  if (resp.ok) return await resp.json();
+  return null;
+};
+
 export const LendApi = {
   lendBook,
   returnBook,
+  fetchDueBooks,
 };

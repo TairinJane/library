@@ -10,6 +10,7 @@ export const NavBar = () => {
         <ListItemLink text={'Books Search'} to={'/search/books'} />
         <ListItemLink text={'Readers Search'} to={'/search/readers'} />
         <ListItemLink text={'Lend a Book'} to={'/lend'} />
+        <ListItemLink text={'Due Books'} to={'/due'} />
       </List>
     </Drawer>
   );

@@ -45,4 +45,9 @@ class LendController(private val readersRepository: ReadersRepository,
             throw ResponseStatusException(HttpStatus.BAD_REQUEST)
         }
     }
+
+    @GetMapping("/due")
+    fun dueBooks(): List<BorrowedBook> {
+        return borrowedBooksRepository.findAllByReturnDateIsNull()
+    }
 }

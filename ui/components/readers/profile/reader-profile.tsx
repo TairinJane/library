@@ -28,7 +28,6 @@ export const ReaderProfile = ({ match }: RouteComponentProps<{ id?: string }>) =
   const onBookSelect = useCallback(
     (rowIndex: number) => {
       const book = history[rowIndex];
-      console.log(book);
       if (!book.returnDate) {
         setBookToReturn(book);
         setOpen(true);

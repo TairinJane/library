@@ -21,7 +21,17 @@ const returnBook = (bookId: number) => {
   };
 };
 
+const fetchDueBooks = () => {
+  return (dispatch: Dispatch) => {
+    dispatch(LendActions.fetchDueBooks.request());
+    return LendApi.fetchDueBooks()
+      .then(json => dispatch(LendActions.fetchDueBooks.success(json)))
+      .catch(() => dispatch(LendActions.fetchDueBooks.failure()));
+  };
+};
+
 export const LendThunks = {
   lendBook,
   returnBook,
+  fetchDueBooks,
 };

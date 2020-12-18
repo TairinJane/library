@@ -13,6 +13,8 @@ import { configureStore } from './store/configure.store';
 import { ReadersSearchPage } from './components/readers/search/readers-search-page';
 import { LendPage } from './components/lend-books/lend-page';
 import { ReaderProfile } from './components/readers/profile/reader-profile';
+import { HomePage } from './components/home/home-page';
+import { DuePage } from './components/due/due-page';
 
 const App = () => {
   const store = configureStore();
@@ -23,9 +25,11 @@ const App = () => {
         <MainContent>
           <Container>
             <Switch>
+              <Route exact path="/" component={HomePage} />
               <Route exact path="/search/books" component={BooksSearchPage} />
               <Route exact path="/search/readers" component={ReadersSearchPage} />
               <Route exact path="/lend" component={LendPage} />
+              <Route exact path="/due" component={DuePage} />
               <Route exact path="/reader/:id" component={ReaderProfile} />
               <Route render={() => <div>No such page</div>} />
             </Switch>

@@ -1,4 +1,4 @@
-import { TLoadable } from '../utils/state.utils';
+import { TLoadable, TLoadableState } from '../utils/state.utils';
 
 export type TAuthor = {
   id: number;
@@ -120,14 +120,22 @@ export type TReadersProfiles = {
 
 export const readersInfoDefaults: TReadersProfiles = {};
 
+export type TDueBooks = {
+  books: TBorrowedBook[];
+} & TLoadable;
+
+export const dueBooksDefaults: TDueBooks = { books: [], ...TLoadableState.DEFAULT };
+
 export type TStore = {
   search: TSearch;
   lend: TLend;
   readersInfo: TReadersProfiles;
+  due: TDueBooks;
 };
 
 export const storeDefaults: TStore = {
   search: searchStoreDefaults,
   lend: lendDefaults,
   readersInfo: readersInfoDefaults,
+  due: dueBooksDefaults,
 };

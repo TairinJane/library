@@ -21,8 +21,15 @@ const returnBook = createAsyncAction('LEND/RETURN_REQ', 'LEND/RETURN_SUCCESS', '
 
 const clearLendInfo = createAction('LEND/CLEAR_INFO')();
 
+const fetchDueBooks = createAsyncAction('BOOKS/DUE_BOOKS_REQ', 'BOOKS/DUE_BOOKS_SUCCESS', 'BOOKS/DUE_BOOKS_ERROR')<
+  [undefined, undefined],
+  TBorrowedBook[],
+  [undefined, undefined]
+>();
+
 export const LendActions = {
   lendBook,
   returnBook,
   clearLendInfo,
+  fetchDueBooks,
 };
