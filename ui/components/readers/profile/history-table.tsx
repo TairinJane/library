@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { Cell, Column, SelectionModes, Table } from '@blueprintjs/table';
+import { Cell, Column, IColumnProps, SelectionModes, Table } from '@blueprintjs/table';
 import { IFocusedCellCoordinates } from '@blueprintjs/table/lib/esm/common/cell';
 import { TBorrowedBook } from '../../../store/store';
 import { personInitials } from '../../../utils/title.utils';
@@ -28,6 +28,19 @@ export const HistoryTable = ({ books, onRowClick, readerColumn = false }: Props)
     [onRowClick],
   );
 
+  const columns = useMemo(() => {
+    const predefinedColumns: React.ReactElement<IColumnProps>[] = [
+      <Column name={'Title'} cellRenderer={titleCellRenderer} key={0} />,
+      <Column name={'Author'} cellRenderer={authorCellRenderer} key={1} />,
+      <Column name={'Reader'} cellRenderer={readerCellRenderer} key={2} />,
+      <Column name={'Borrow Date'} cellRenderer={borrowRenderer} key={3} />,
+      <Column name={'Due Date'} cellRenderer={dueRenderer} key={4} />,
+      <Column name={'Return Date'} cellRenderer={returnRenderer} key={5} />,
+    ];
+    if (!readerColumn) return predefinedColumns.filter(column => column.props.name != 'Reader');
+    else return predefinedColumns;
+  }, [readerColumn]);
+
   return (
     <Table
       numRows={books?.length}
@@ -37,12 +50,7 @@ export const HistoryTable = ({ books, onRowClick, readerColumn = false }: Props)
       onFocusedCell={!!onRowClick ? onFocus : null}
       selectionModes={SelectionModes.ROWS_AND_CELLS}
     >
-      <Column name={'Title'} cellRenderer={titleCellRenderer} />
-      <Column name={'Author'} cellRenderer={authorCellRenderer} />
-      <Column name={'Reader'} cellRenderer={readerCellRenderer} />
-      <Column name={'Borrow Date'} cellRenderer={borrowRenderer} />
-      <Column name={'Due Date'} cellRenderer={dueRenderer} />
-      <Column name={'Return Date'} cellRenderer={returnRenderer} />
+      {columns}
     </Table>
   );
 };

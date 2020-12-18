@@ -42,7 +42,7 @@ export const DuePage = () => {
     <>
       <h1 className="bp3-heading offset-bottom-24">Due Books</h1>
       {!!books?.length ? (
-        <HistoryTable books={books} onRowClick={onBookSelect} />
+        <HistoryTable books={books} onRowClick={onBookSelect} readerColumn />
       ) : (
         <div>{isFetching ? 'Due books are loading...' : 'No due books yet'}</div>
       )}
