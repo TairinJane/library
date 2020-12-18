@@ -15,6 +15,7 @@ import { LendPage } from './components/lend-books/lend-page';
 import { ReaderProfile } from './components/readers/profile/reader-profile';
 import { HomePage } from './components/home/home-page';
 import { DuePage } from './components/due/due-page';
+import { NewReaderPage } from './components/readers/new/new-reader-page';
 
 const App = () => {
   const store = configureStore();
@@ -30,6 +31,7 @@ const App = () => {
               <Route exact path="/search/readers" component={ReadersSearchPage} />
               <Route exact path="/lend" component={LendPage} />
               <Route exact path="/due" component={DuePage} />
+              <Route exact path="/reader/new" component={NewReaderPage} />
               <Route exact path="/reader/:id" component={ReaderProfile} />
               <Route render={() => <div>No such page</div>} />
             </Switch>

@@ -21,8 +21,23 @@ const getReaderInfo = async (readerId: number): Promise<TReader> => {
   return null;
 };
 
+const addNewReader = async (
+  firstName: string,
+  lastName: string,
+  birthDate: Date,
+  patronymic?: string,
+): Promise<TReader> => {
+  const reader = { firstName, lastName, birthDate: birthDate.toLocaleDateString(), patronymic };
+  const resp = await fetch(toApiURL('/readers/new?' + stringify(reader, { skipNull: true, skipEmptyString: true })), {
+    method: 'POST',
+  });
+  if (resp.ok) return await resp.json();
+  return null;
+};
+
 export const ReadersApi = {
   getReaders,
   getHistory,
   getReaderInfo,
+  addNewReader,
 };

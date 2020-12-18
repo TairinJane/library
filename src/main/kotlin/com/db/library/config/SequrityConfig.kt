@@ -15,7 +15,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager
 class SecurityConfig : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
-        http.cors().and().authorizeRequests().anyRequest().permitAll()
+        http.cors().and().authorizeRequests().anyRequest().permitAll().and().csrf().disable()
     }
 
     @Bean

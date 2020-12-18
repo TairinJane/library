@@ -7,6 +7,7 @@ import com.db.library.repositories.ReadersRepository
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
+import java.time.LocalDate
 
 @CrossOrigin
 @RestController
@@ -47,4 +48,11 @@ class ReadersController(private val readersRepository: ReadersRepository, privat
         println("hands for $id")
         return borrowedBooksRepository.findAllByReaderIdAndReturnDateIsNull(id)
     }
+
+    @PostMapping("/new")
+    fun newReader(@RequestParam firstName: String, @RequestParam lastName: String, @RequestParam(required = false) patronymic: String, @RequestParam birthDate: LocalDate): Reader {
+        val reader = Reader(lastName, firstName, patronymic, birthDate)
+        return readersRepository.save(reader)
+    }
+
 }

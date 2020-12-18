@@ -114,11 +114,19 @@ export type TReaderInfo = {
   history?: TBorrowedBook[];
 };
 
-export type TReadersProfiles = {
-  [id: number]: TReaderInfo;
+export type TReadersProfiles = Record<number, TReaderInfo>;
+
+export const readersProfilesDefaults: TReadersProfiles = {};
+
+export type TStoreReaders = {
+  add: TLoadable;
+  profiles: TReadersProfiles;
 };
 
-export const readersInfoDefaults: TReadersProfiles = {};
+export const storeReadersDefaults: TStoreReaders = {
+  add: TLoadableState.DEFAULT,
+  profiles: readersProfilesDefaults,
+};
 
 export type TDueBooks = {
   books: TBorrowedBook[];
@@ -129,13 +137,13 @@ export const dueBooksDefaults: TDueBooks = { books: [], ...TLoadableState.DEFAUL
 export type TStore = {
   search: TSearch;
   lend: TLend;
-  readersInfo: TReadersProfiles;
+  readers: TStoreReaders;
   due: TDueBooks;
 };
 
 export const storeDefaults: TStore = {
   search: searchStoreDefaults,
   lend: lendDefaults,
-  readersInfo: readersInfoDefaults,
+  readers: storeReadersDefaults,
   due: dueBooksDefaults,
 };

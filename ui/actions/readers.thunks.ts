@@ -30,8 +30,18 @@ const getReaderInfo = (readerId: number) => {
   };
 };
 
+const addNewReader = (firstName: string, lastName: string, birthDate: Date, patronymic?: string) => {
+  return (dispatch: Dispatch) => {
+    dispatch(ReadersActions.addNewReader.request());
+    return ReadersApi.addNewReader(firstName, lastName, birthDate, patronymic)
+      .then(json => dispatch(ReadersActions.addNewReader.success(json)))
+      .catch(() => dispatch(ReadersActions.addNewReader.failure()));
+  };
+};
+
 export const ReadersThunks = {
   findReaders,
   getReaderHistory,
   getReaderInfo,
+  addNewReader,
 };

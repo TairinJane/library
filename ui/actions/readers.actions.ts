@@ -23,9 +23,19 @@ const getReaderInfo = createAsyncAction('READERS/GET_INFO_REQ', 'READERS/GET_INF
 
 const saveReaderInfo = createAction('READERS/SAVE_READER_INFO')<TReader>();
 
+const addNewReader = createAsyncAction(
+  'READERS/ADD_READER_REQ',
+  'READERS/ADD_READER_SUCCESS',
+  'READERS/ADD_READER_ERROR',
+)<[undefined, undefined], TReader, [undefined, undefined]>();
+
+const addStateToDefault = createAction('READERS/ADD_READER_DEFAULT')();
+
 export const ReadersActions = {
   findReaders,
   saveReaderInfo,
   getHistory,
   getReaderInfo,
+  addNewReader,
+  addStateToDefault,
 };

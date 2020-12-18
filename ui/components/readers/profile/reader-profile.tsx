@@ -11,7 +11,7 @@ import { LendThunks } from '../../../actions/lend.thunks';
 export const ReaderProfile = ({ match }: RouteComponentProps<{ id?: string }>) => {
   const dispatch = useDispatch();
   const readerId = +match.params.id;
-  const { reader, history } = useSelector<TStore, TReaderInfo>(store => store.readersInfo?.[readerId]) || {};
+  const { reader, history } = useSelector<TStore, TReaderInfo>(store => store.readers.profiles[readerId]) || {};
   const [bookToReturn, setBookToReturn] = useState<TBorrowedBook>();
   const [isOpen, setOpen] = useState(false);
 
@@ -60,7 +60,7 @@ export const ReaderProfile = ({ match }: RouteComponentProps<{ id?: string }>) =
         </Grid>
       </Grid>
       <h2 className="bp3-heading offset-bottom-24 offset-top-24">History</h2>
-      {history ? <HistoryTable books={history} onRowClick={onBookSelect} /> : 'No history yet'}
+      {!!history?.length ? <HistoryTable books={history} onRowClick={onBookSelect} /> : 'No history yet'}
       <Alert confirmButtonText="Yes" cancelButtonText="No" isOpen={isOpen} onCancel={onCancel} onConfirm={onConfirm}>
         <p className="text-bold">Do you want to return this book?</p>
         <p>{bookToReturn?.book.title ?? ''}</p>

@@ -3,6 +3,7 @@
 @import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
 @import "~@blueprintjs/table/lib/css/table.css";
 @import "~@blueprintjs/core/lib/scss/variables";
+@import "~@blueprintjs/datetime/lib/css/blueprint-datetime.css";
 
 $nav-bar-width: 200px;
 
@@ -35,6 +36,10 @@ $nav-bar-width: 200px;
 
 .offset-top-24 {
   margin-top: 24px;
+}
+
+.offset-bottom-8 {
+  margin-bottom: 8px;
 }
 
 .offset-bottom-12 {

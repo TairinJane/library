@@ -11,6 +11,7 @@ export const NavBar = () => {
         <ListItemLink text={'Readers Search'} to={'/search/readers'} />
         <ListItemLink text={'Lend a Book'} to={'/lend'} />
         <ListItemLink text={'Due Books'} to={'/due'} />
+        <ListItemLink text={'Add Reader'} to={'/reader/new'} />
       </List>
     </Drawer>
   );

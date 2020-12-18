@@ -10,7 +10,7 @@ class Reader(
         var lastName: String,
         var patronymic: String,
         var birthDate: LocalDate,
-        var registrationDate: LocalDate,
+        var registrationDate: LocalDate = LocalDate.now(),
         @Id
         @Column(name = "reader_id")
         @GeneratedValue(strategy = GenerationType.IDENTITY)
