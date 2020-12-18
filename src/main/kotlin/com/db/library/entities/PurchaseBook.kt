@@ -7,9 +7,9 @@ import javax.validation.constraints.Size
 @Entity
 @Table(name = "purchases_books")
 class PurchaseBook(
-        @ManyToOne
+        /*@ManyToOne
         @JoinColumn(name = "purchase_id")
-        var purchase: Purchase,
+        var purchase: Purchase,*/
         @Size(min = 13, max = 13)
         var ISBN: String,
         @Min(1)

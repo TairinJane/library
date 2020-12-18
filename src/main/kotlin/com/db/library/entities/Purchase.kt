@@ -1,5 +1,6 @@
 package com.db.library.entities
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import java.time.LocalDate
 import javax.persistence.*
 
@@ -10,7 +11,7 @@ class Purchase(
         @JoinColumn(name = "employee_id")
         var employee: Employee,
         var supplier: String,
-        var purchaseDate: LocalDate,
+        var purchaseDate: LocalDate = LocalDate.now(),
         var deliveryDate: LocalDate,
         @OneToMany(fetch = FetchType.LAZY)
         @JoinColumn(name = "purchase_id")

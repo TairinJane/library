@@ -39,7 +39,8 @@ export const LendPage = () => {
 
   const onBookSelect = useCallback(
     (rowIndex: number) => {
-      setPickedBook(books[rowIndex]);
+      const book = books[rowIndex];
+      if (book.available > 0) setPickedBook(book);
     },
     [books],
   );
