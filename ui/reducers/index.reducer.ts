@@ -1,15 +1,13 @@
 import { combineReducers } from 'redux';
 import { TStore } from '../store/store';
-import { searchReducer } from './search.reducer';
-import { lendReducer } from './lend.reducer';
 import { readersReducer } from './readers.reducer';
-import { dueReducer } from './due.reducer';
+import { booksReducer } from './books.reducer';
+import { purchasesReducer } from './purchases.reducer';
 
 const rootReducer = combineReducers<TStore>({
-  search: searchReducer,
-  lend: lendReducer,
   readers: readersReducer,
-  due: dueReducer,
+  books: booksReducer,
+  purchases: purchasesReducer,
 });
 
 export default rootReducer;

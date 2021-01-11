@@ -6,7 +6,6 @@ import { Grid } from '@material-ui/core';
 import { HistoryTable } from './history-table';
 import { ReadersThunks } from '../../../actions/readers.thunks';
 import { Alert } from '@blueprintjs/core';
-import { LendThunks } from '../../../actions/lend.thunks';
 
 export const ReaderProfile = ({ match }: RouteComponentProps<{ id?: string }>) => {
   const dispatch = useDispatch();
@@ -42,7 +41,7 @@ export const ReaderProfile = ({ match }: RouteComponentProps<{ id?: string }>) =
   }, []);
 
   const onConfirm = useCallback(() => {
-    dispatch(LendThunks.returnBook(bookToReturn.id));
+    dispatch(ReadersThunks.returnBook(bookToReturn.id));
     setOpen(false);
   }, [bookToReturn]);
 

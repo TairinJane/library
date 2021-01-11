@@ -39,9 +39,19 @@ const addNewReader = (firstName: string, lastName: string, birthDate: Date, patr
   };
 };
 
+const returnBook = (bookId: number) => {
+  return (dispatch: Dispatch) => {
+    dispatch(ReadersActions.returnBook.request(bookId));
+    return ReadersApi.returnBook(bookId)
+      .then(json => dispatch(ReadersActions.returnBook.success(json, bookId)))
+      .catch(() => dispatch(ReadersActions.returnBook.failure(bookId)));
+  };
+};
+
 export const ReadersThunks = {
   findReaders,
   getReaderHistory,
   getReaderInfo,
   addNewReader,
+  returnBook,
 };

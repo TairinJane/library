@@ -1,13 +1,12 @@
 import { ActionType, getType } from 'typesafe-actions';
-import { storeReadersDefaults, TStoreReaders } from '../store/store';
+import { storeReadersDefaults, TReadersStore } from '../store/store';
 import produce from 'immer';
 import { ReadersActions } from '../actions/readers.actions';
-import { LendActions } from '../actions/lend.actions';
 import { TLoadableState } from '../utils/state.utils';
 
-type TReadersActions = ActionType<typeof ReadersActions> | ActionType<typeof LendActions>;
+type TReadersActions = ActionType<typeof ReadersActions>;
 
-export const readersReducer = (state = storeReadersDefaults, action: TReadersActions): TStoreReaders => {
+export const readersReducer = (state = storeReadersDefaults, action: TReadersActions): TReadersStore => {
   return produce(state, draft => {
     switch (action.type) {
       case getType(ReadersActions.saveReaderInfo):
@@ -29,16 +28,23 @@ export const readersReducer = (state = storeReadersDefaults, action: TReadersAct
         break;
       case getType(ReadersActions.getReaderInfo.failure):
         break;
-      case getType(LendActions.returnBook.request):
+      case getType(ReadersActions.findReaders.request):
         break;
-      case getType(LendActions.returnBook.success):
+      case getType(ReadersActions.findReaders.success):
+        draft.search = action.payload;
+        break;
+      case getType(ReadersActions.findReaders.failure):
+        break;
+      case getType(ReadersActions.returnBook.request):
+        break;
+      case getType(ReadersActions.returnBook.success):
         const readerId = action.payload.reader.id;
         if (draft.profiles[readerId])
           draft.profiles[readerId].history = draft.profiles[readerId].history.map(book =>
             book.id === action.meta ? action.payload : book,
           );
         break;
-      case getType(LendActions.returnBook.failure):
+      case getType(ReadersActions.returnBook.failure):
         break;
       case getType(ReadersActions.addNewReader.request):
         draft.add.isFetching = true;

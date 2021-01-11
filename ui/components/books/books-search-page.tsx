@@ -5,7 +5,7 @@ import { BooksTable } from './books-table';
 import { BooksSearchInputs } from './books-search-inputs';
 
 export const BooksSearchPage = () => {
-  const books = useSelector<TStore, TBook[]>(store => store.search.books);
+  const books = useSelector<TStore, TBook[]>(store => store.books.search);
 
   return (
     <>

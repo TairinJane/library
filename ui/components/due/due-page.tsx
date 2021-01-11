@@ -3,18 +3,19 @@ import { HistoryTable } from '../readers/profile/history-table';
 import { TBorrowedBook, TDueBooks, TStore } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { Alert } from '@blueprintjs/core';
-import { LendThunks } from '../../actions/lend.thunks';
+import { BooksThunks } from '../../actions/books.thunks';
+import { ReadersThunks } from '../../actions/readers.thunks';
 
 export const DuePage = () => {
   const dispatch = useDispatch();
 
-  const { books, isFetching, isError } = useSelector<TStore, TDueBooks>(store => store.due);
+  const { books, isFetching, isError } = useSelector<TStore, TDueBooks>(store => store.books.due);
 
   const [bookToReturn, setBookToReturn] = useState<TBorrowedBook>();
   const [isOpen, setOpen] = useState(false);
 
   useEffect(() => {
-    if (!books?.length && !isFetching && !isError) dispatch(LendThunks.fetchDueBooks());
+    if (!books?.length && !isFetching && !isError) dispatch(BooksThunks.fetchDueBooks());
   }, [books, isFetching, isError]);
 
   const onCancel = useCallback(() => {
@@ -23,7 +24,7 @@ export const DuePage = () => {
   }, []);
 
   const onConfirm = useCallback(() => {
-    dispatch(LendThunks.returnBook(bookToReturn.id));
+    dispatch(ReadersThunks.returnBook(bookToReturn.id));
     setOpen(false);
   }, [bookToReturn]);
 

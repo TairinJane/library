@@ -1,31 +1,30 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TBook, TReader, TSearch, TStore } from '../../store/store';
+import { TBook, TBooksStore, TReader, TReadersStore, TStore } from '../../store/store';
 import { BooksTable } from '../books/books-table';
 import { BooksSearchInputs } from '../books/books-search-inputs';
 import { ReadersSearchControls } from '../readers/search/readers-search-controls';
 import { ReadersTable } from '../readers/readers-table';
 import { Grid } from '@material-ui/core';
 import { Button } from '@blueprintjs/core';
-import { LendThunks } from '../../actions/lend.thunks';
-import { SearchActions } from '../../actions/search.actions';
 import { useHistory } from 'react-router';
-import { LendActions } from '../../actions/lend.actions';
+import { BooksThunks } from '../../actions/books.thunks';
 
 export const LendPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { readers, books } = useSelector<TStore, TSearch>(store => store.search);
-  const isLendSuccess = useSelector<TStore, boolean>(store => store.lend?.isSuccess) || false;
+  const { search: readers } = useSelector<TStore, TReadersStore>(store => store.readers);
+  const { search: books } = useSelector<TStore, TBooksStore>(store => store.books);
+  const isLendSuccess = useSelector<TStore, boolean>(store => store.books.lend?.isSuccess) || false;
 
   const [pickedReader, setPickedReader] = useState<TReader>();
   const [pickedBook, setPickedBook] = useState<TBook>();
 
   useEffect(() => {
     if (isLendSuccess) {
-      dispatch(SearchActions.clearSearch());
-      dispatch(LendActions.clearLendInfo());
+      // dispatch(PurchasesActions.clearSearch());
+      // dispatch(LendActions.clearLendInfo());
       history.push('/');
     }
   }, [isLendSuccess]);
@@ -47,7 +46,7 @@ export const LendPage = () => {
 
   const onLend = useCallback(() => {
     console.log('lend book:', pickedBook.title, pickedReader.firstName);
-    dispatch(LendThunks.lendBook(pickedReader.id, pickedBook.id));
+    dispatch(BooksThunks.lendBook(pickedReader.id, pickedBook.id));
   }, [pickedBook, pickedReader]);
 
   return (

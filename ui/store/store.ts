@@ -94,14 +94,6 @@ export type TEvent = {
   eventPlace: string;
 };
 
-export type TSearch = {
-  books?: TBook[];
-  readers?: TReader[];
-  purchases?: TPurchase[];
-};
-
-export const searchStoreDefaults: TSearch = {};
-
 export type TLend = {
   readerId?: number;
   bookId?: number;
@@ -110,23 +102,9 @@ export type TLend = {
 
 export const lendDefaults: TLend = { isSuccess: false };
 
-export type TReaderInfo = {
-  reader?: TReader;
-  history?: TBorrowedBook[];
-};
-
-export type TReadersProfiles = Record<number, TReaderInfo>;
-
-export const readersProfilesDefaults: TReadersProfiles = {};
-
-export type TStoreReaders = {
-  add: TLoadable;
-  profiles: TReadersProfiles;
-};
-
-export const storeReadersDefaults: TStoreReaders = {
-  add: TLoadableState.DEFAULT,
-  profiles: readersProfilesDefaults,
+export type TBookInfo = {
+  book: TBook;
+  history: TBorrowedBook[];
 };
 
 export type TDueBooks = {
@@ -135,16 +113,51 @@ export type TDueBooks = {
 
 export const dueBooksDefaults: TDueBooks = { books: [], ...TLoadableState.DEFAULT };
 
-export type TStore = {
-  search: TSearch;
+export type TBooksStore = {
+  search: TBook[];
   lend: TLend;
-  readers: TStoreReaders;
+  profiles: Record<number, TBookInfo>;
   due: TDueBooks;
 };
 
-export const storeDefaults: TStore = {
-  search: searchStoreDefaults,
+export const booksStoreDefaults: TBooksStore = {
+  search: [],
   lend: lendDefaults,
-  readers: storeReadersDefaults,
+  profiles: {},
   due: dueBooksDefaults,
+};
+
+export type TReaderInfo = {
+  reader?: TReader;
+  history?: TBorrowedBook[];
+};
+
+export type TReadersStore = {
+  search: TReader[];
+  profiles: Record<number, TReaderInfo>;
+  add: TLoadable;
+};
+
+export const storeReadersDefaults: TReadersStore = {
+  search: [],
+  add: TLoadableState.DEFAULT,
+  profiles: {},
+};
+
+export type TPurchasesStore = {
+  purchases: TPurchase[];
+} & TLoadable;
+
+export const purchasesStoreDefaults: TPurchasesStore = { purchases: [], ...TLoadableState.DEFAULT };
+
+export type TStore = {
+  books: TBooksStore;
+  readers: TReadersStore;
+  purchases: TPurchasesStore;
+};
+
+export const storeDefaults: TStore = {
+  readers: storeReadersDefaults,
+  books: booksStoreDefaults,
+  purchases: purchasesStoreDefaults,
 };

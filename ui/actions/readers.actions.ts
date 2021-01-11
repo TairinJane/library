@@ -29,6 +29,12 @@ const addNewReader = createAsyncAction(
   'READERS/ADD_READER_ERROR',
 )<[undefined, undefined], TReader, [undefined, undefined]>();
 
+const returnBook = createAsyncAction('READERS/RETURN_REQ', 'READERS/RETURN_SUCCESS', 'READERS/RETURN_ERROR')<
+  number,
+  [TBorrowedBook, number],
+  number
+>();
+
 const addStateToDefault = createAction('READERS/ADD_READER_DEFAULT')();
 
 export const ReadersActions = {
@@ -36,6 +42,7 @@ export const ReadersActions = {
   saveReaderInfo,
   getHistory,
   getReaderInfo,
+  returnBook,
   addNewReader,
   addStateToDefault,
 };

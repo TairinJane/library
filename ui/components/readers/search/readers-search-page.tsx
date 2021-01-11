@@ -9,7 +9,7 @@ import { ReadersActions } from '../../../actions/readers.actions';
 export const ReadersSearchPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const readers = useSelector<TStore, TReader[]>(store => store.search.readers);
+  const readers = useSelector<TStore, TReader[]>(store => store.readers.search);
 
   const onReaderSelect = useCallback(
     (rowIndex: number) => {
