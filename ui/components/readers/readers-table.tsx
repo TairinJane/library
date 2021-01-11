@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { TReader } from '../../store/store';
 import { Cell, Column, SelectionModes, Table } from '@blueprintjs/table';
 import { IFocusedCellCoordinates } from '@blueprintjs/table/lib/esm/common/cell';
+import { personFullName } from '../../utils/title.utils';
 
 type Props = {
   readers?: TReader[];
@@ -11,7 +12,7 @@ type Props = {
 export const ReadersTable = ({ readers, onRowClick }: Props) => {
   const nameCellRenderer = (rowIndex: number) => {
     const reader = readers[rowIndex];
-    const name = `${reader.firstName} ${reader.lastName} ${reader.patronymic ?? ''}`;
+    const name = personFullName(reader);
     return <Cell>{name}</Cell>;
   };
   const birthDateCellRenderer = (rowIndex: number) => <Cell interactive>{readers[rowIndex]?.birthDate}</Cell>;

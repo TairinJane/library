@@ -14,16 +14,15 @@ import java.time.LocalDate
 @RequestMapping("/api/readers")
 class ReadersController(private val readersRepository: ReadersRepository, private val borrowedBooksRepository: BorrowedBooksRepository) {
 
-    //familiya == first name in bd (should be last name)
     @GetMapping
     fun readers(@RequestParam(defaultValue = "") firstName: String, @RequestParam(defaultValue = "") lastName: String): List<Reader> {
         println("request: $firstName $lastName")
         return if (firstName.isNotEmpty() && lastName.isNotEmpty())
-            readersRepository.findAllByFirstNameAndLastName(lastName, firstName)
+            readersRepository.findAllByFirstNameAndLastName(firstName, lastName)
         else if (lastName.isNotEmpty())
-            readersRepository.findAllByFirstName(lastName)
+            readersRepository.findAllByLastName(lastName)
         else if (firstName.isNotEmpty())
-            readersRepository.findAllByLastName(firstName)
+            readersRepository.findAllByFirstName(firstName)
         else emptyList()
     }
 
@@ -51,7 +50,7 @@ class ReadersController(private val readersRepository: ReadersRepository, privat
 
     @PostMapping("/new")
     fun newReader(@RequestParam firstName: String, @RequestParam lastName: String, @RequestParam(required = false) patronymic: String, @RequestParam birthDate: LocalDate): Reader {
-        val reader = Reader(lastName, firstName, patronymic, birthDate)
+        val reader = Reader(firstName, lastName, patronymic, birthDate)
         return readersRepository.save(reader)
     }
 

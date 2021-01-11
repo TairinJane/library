@@ -6,6 +6,7 @@ import { Grid } from '@material-ui/core';
 import { HistoryTable } from './history-table';
 import { ReadersThunks } from '../../../actions/readers.thunks';
 import { Alert } from '@blueprintjs/core';
+import { personFullName } from '../../../utils/title.utils';
 
 export const ReaderProfile = ({ match }: RouteComponentProps<{ id?: string }>) => {
   const dispatch = useDispatch();
@@ -47,9 +48,7 @@ export const ReaderProfile = ({ match }: RouteComponentProps<{ id?: string }>) =
 
   return !!reader ? (
     <>
-      <h1 className="bp3-heading offset-bottom-24">
-        {`${reader.firstName} ${reader.lastName} ${reader.patronymic ?? ''}`}
-      </h1>
+      <h1 className="bp3-heading offset-bottom-24">{personFullName(reader)}</h1>
       <Grid container direction={'column'}>
         <Grid item>
           <span className="text-bold">Birth date:</span> {reader.birthDate}

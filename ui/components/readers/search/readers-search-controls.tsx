@@ -3,6 +3,7 @@ import { ReadersThunks } from '../../../actions/readers.thunks';
 import { useDispatch } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import { Button, InputGroup } from '@blueprintjs/core';
+import { capitalize } from '../../../utils/utils';
 
 export const ReadersSearchControls = () => {
   const dispatch = useDispatch();
@@ -10,7 +11,7 @@ export const ReadersSearchControls = () => {
   const [firstName, setFirstName] = useState('');
 
   const handleSearch = useCallback(() => {
-    if (firstName || lastName) dispatch(ReadersThunks.findReaders(firstName, lastName));
+    if (firstName || lastName) dispatch(ReadersThunks.findReaders(capitalize(firstName), capitalize(lastName)));
   }, [firstName, lastName]);
 
   return (

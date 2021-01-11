@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { TBook } from '../../store/store';
 import { Cell, Column, SelectionModes, Table } from '@blueprintjs/table';
 import { IFocusedCellCoordinates } from '@blueprintjs/table/lib/esm/common/cell';
+import { personInitials } from '../../utils/title.utils';
 
 type Props = {
   books?: TBook[];
@@ -11,9 +12,7 @@ type Props = {
 export const BooksTable = ({ books, onRowClick }: Props) => {
   const titleCellRenderer = (rowIndex: number) => <Cell>{books[rowIndex]?.title}</Cell>;
   const authorCellRenderer = (rowIndex: number) => {
-    const authors = books[rowIndex]?.authors.map(
-      author => `${author.firstName} ${author.lastName[0]}. ${author.patronymic ? author.patronymic[0] + '.' : ''}`,
-    );
+    const authors = books[rowIndex]?.authors.map(author => personInitials(author));
     return <Cell>{authors.join(', ')}</Cell>;
   };
   const amountRenderer = (rowIndex: number) => <Cell>{books[rowIndex]?.amount}</Cell>;

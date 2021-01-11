@@ -3,6 +3,7 @@ import { Button, InputGroup } from '@blueprintjs/core';
 import React, { useCallback, useState } from 'react';
 import { BooksThunks } from '../../actions/books.thunks';
 import { useDispatch } from 'react-redux';
+import { capitalize } from '../../utils/utils';
 
 export const BooksSearchInputs = () => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ export const BooksSearchInputs = () => {
 
   const handleSearch = useCallback(() => {
     if (title || authorFirstName || authorLastName)
-      dispatch(BooksThunks.findBooks(title, authorFirstName, authorLastName));
+      dispatch(BooksThunks.findBooks(title, capitalize(authorFirstName), capitalize(authorLastName)));
   }, [title, authorFirstName, authorLastName]);
 
   return (
