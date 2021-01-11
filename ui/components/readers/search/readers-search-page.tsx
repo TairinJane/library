@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TReader, TStore } from '../../../store/store';
-import { ReadersTable } from '../readers-table';
+import { ReadersTable } from '../../tables/readers-table';
 import { useHistory } from 'react-router';
 import { ReadersSearchControls } from './readers-search-controls';
 import { ReadersActions } from '../../../actions/readers.actions';

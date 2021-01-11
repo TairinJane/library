@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { TBook, TStore } from '../../store/store';
-import { BooksTable } from './books-table';
+import { BooksTable } from '../tables/books-table';
 import { BooksSearchInputs } from './books-search-inputs';
 
 export const BooksSearchPage = () => {

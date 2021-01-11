@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo } from 'react';
 import { Cell, Column, IColumnProps, SelectionModes, Table } from '@blueprintjs/table';
 import { IFocusedCellCoordinates } from '@blueprintjs/table/lib/esm/common/cell';
-import { TBorrowedBook } from '../../../store/store';
-import { personInitials } from '../../../utils/title.utils';
+import { TBorrowedBook } from '../../store/store';
+import { personInitials } from '../../utils/title.utils';
 
 type Props = {
   books?: TBorrowedBook[];

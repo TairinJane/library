@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { TBorrowedBook, TReaderInfo, TStore } from '../../../store/store';
 import { RouteComponentProps } from 'react-router';
 import { Grid } from '@material-ui/core';
-import { HistoryTable } from './history-table';
+import { HistoryTable } from '../../tables/history-table';
 import { ReadersThunks } from '../../../actions/readers.thunks';
 import { Alert } from '@blueprintjs/core';
 import { personFullName } from '../../../utils/title.utils';

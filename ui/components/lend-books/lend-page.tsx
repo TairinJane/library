@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TBook, TBooksStore, TReader, TReadersStore, TStore } from '../../store/store';
-import { BooksTable } from '../books/books-table';
+import { BooksTable } from '../tables/books-table';
 import { BooksSearchInputs } from '../books/books-search-inputs';
 import { ReadersSearchControls } from '../readers/search/readers-search-controls';
-import { ReadersTable } from '../readers/readers-table';
+import { ReadersTable } from '../tables/readers-table';
 import { Grid } from '@material-ui/core';
 import { Button } from '@blueprintjs/core';
 import { useHistory } from 'react-router';

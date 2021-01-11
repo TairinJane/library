@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { HistoryTable } from '../readers/profile/history-table';
+import { HistoryTable } from '../tables/history-table';
 import { TBorrowedBook, TDueBooks, TStore } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { Alert } from '@blueprintjs/core';
