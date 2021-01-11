@@ -35,7 +35,6 @@ export const searchReducer = (state = stateSearchDefaults, action: TSearchAction
       case getType(SearchActions.getPurchases.request):
         break;
       case getType(SearchActions.getPurchases.success):
-        console.log(action.payload?.length);
         draft.purchases = action.payload;
         break;
       case getType(SearchActions.getPurchases.failure):

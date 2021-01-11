@@ -11,7 +11,7 @@ export type TAuthor = {
 
 export type TBook = {
   id: number;
-  ISBN: string;
+  isbn: string;
   title: string;
   publicationYear: number;
   genre: string;
@@ -73,7 +73,7 @@ export type TBookRequest = {
 
 export type TPurchaseBook = {
   id: number;
-  ISBN: string;
+  isbn: string;
   amount: number;
 };
 
