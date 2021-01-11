@@ -41,7 +41,7 @@ export const readersReducer = (state = storeReadersDefaults, action: TReadersAct
         const readerId = action.payload.reader.id;
         if (draft.profiles[readerId])
           draft.profiles[readerId].history = draft.profiles[readerId].history.map(book =>
-            book.id === action.meta ? action.payload : book,
+            book.id == action.meta ? action.payload : book,
           );
         break;
       case getType(ReadersActions.returnBook.failure):

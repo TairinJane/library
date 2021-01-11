@@ -36,7 +36,7 @@ const addNewReader = async (
 };
 
 const returnBook = async (bookId: number): Promise<TBorrowedBook> => {
-  const resp = await fetch(toApiURL(`/lend/${bookId}/return`));
+  const resp = await fetch(toApiURL(`/readers/return/${bookId}`));
   if (resp.ok) return await resp.json();
   return null;
 };

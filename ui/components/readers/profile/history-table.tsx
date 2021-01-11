@@ -19,7 +19,9 @@ export const HistoryTable = ({ books, onRowClick, readerColumn = false }: Props)
   const readerCellRenderer = (rowIndex: number) => <Cell>{personInitials(books[rowIndex]?.reader)}</Cell>;
   const borrowRenderer = (rowIndex: number) => <Cell>{books[rowIndex]?.borrowDate}</Cell>;
   const dueRenderer = (rowIndex: number) => <Cell>{books[rowIndex]?.dueDate}</Cell>;
-  const returnRenderer = (rowIndex: number) => <Cell>{books[rowIndex]?.returnDate ?? ''}</Cell>;
+  const returnRenderer = (rowIndex: number) => (
+    <Cell key={`${books[rowIndex]?.returnDate}`}>{books[rowIndex]?.returnDate ?? ''}</Cell>
+  );
 
   const onFocus = useCallback(
     (focusedCell: IFocusedCellCoordinates) => {

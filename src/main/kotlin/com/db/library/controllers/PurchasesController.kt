@@ -17,7 +17,7 @@ class PurchasesController(private val purchasesRepository: PurchasesRepository) 
     fun allPurchases(): List<Purchase> {
         try {
             return purchasesRepository.findAllByPurchaseDateAfter(LocalDate.now()
-                .with(TemporalAdjusters.firstDayOfYear()).plusMonths(6)).filter { purchase -> purchase.books.isNotEmpty() }
+                .minusMonths(6)).filter { purchase -> purchase.books.isNotEmpty() }
         } catch (e: Exception) {
             throw ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR)
         }

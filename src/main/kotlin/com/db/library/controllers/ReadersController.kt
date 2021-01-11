@@ -55,4 +55,16 @@ class ReadersController(private val readersRepository: ReadersRepository, privat
         return readersRepository.save(reader)
     }
 
+    @GetMapping("/return/{id}")
+    fun returnBook(@PathVariable id: Int): BorrowedBook {
+        try {
+            val book = borrowedBooksRepository.getOne(id)
+            book.returnDate = LocalDate.now()
+            borrowedBooksRepository.save(book)
+            println("returned book: $id")
+            return book
+        } catch (e: Exception) {
+            throw ResponseStatusException(HttpStatus.BAD_REQUEST)
+        }
+    }
 }
