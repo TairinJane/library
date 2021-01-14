@@ -45,22 +45,19 @@ class PurchasesController(
     @PostMapping("/new")
     fun newPurchase(@RequestBody @Valid purchaseDTO: PurchaseDTO): Purchase {
         val employee = employeesRepository.getOne(30)
-        val purchase = purchasesRepository.save(
-            Purchase(
-                supplier = purchaseDTO.supplier,
-                deliveryDate = purchaseDTO.deliveryDate,
-                employee = employee,
-            )
+        val purchase = Purchase(
+            supplier = purchaseDTO.supplier,
+            deliveryDate = purchaseDTO.deliveryDate,
+            employee = employee,
         )
-        purchaseDTO.books.forEach { dto ->
-            purchasesBooksRepository.save(
-                PurchaseBook(
-                    purchase.id,
-                    dto.isbn,
-                    dto.amount
-                )
+        val books = purchaseDTO.books.map { dto ->
+            PurchaseBook(
+                purchase,
+                dto.isbn,
+                dto.amount
             )
         }
-        return purchase
+        purchase.books = books
+        return purchasesRepository.save(purchase)
     }
 }

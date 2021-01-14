@@ -1,5 +1,6 @@
 package com.db.library.entities
 
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import java.time.LocalDate
 import javax.persistence.*
 
@@ -17,7 +18,7 @@ class Purchase(
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Int = 0
 ) {
-        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "purchaseId")
-//        @JoinColumn(name = "purchase_id")
+        @JsonManagedReference
+        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "purchase")
         var books: List<PurchaseBook> = emptyList()
 }

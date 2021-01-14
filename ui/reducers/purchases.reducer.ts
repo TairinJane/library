@@ -21,6 +21,9 @@ export const purchasesReducer = (state = purchasesStoreDefaults, action: TSearch
         draft.search.isFetching = false;
         draft.search.isError = true;
         break;
+      case getType(PurchasesActions.newPurchase.success):
+        const purchases = state.search.entities;
+        if (!!purchases?.length) draft.search.entities = [action.payload, ...purchases];
     }
   });
 };
