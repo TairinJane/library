@@ -72,10 +72,10 @@ export const NewPurchase = () => {
     <>
       <h1 className="bp3-heading">New Purchase</h1>
       <Grid container spacing={2} wrap={'wrap'} direction={'column'}>
-        <Grid item xs={5}>
+        <Grid item xs={12}>
           <h3 className="bp3-heading offset-top-24">General Info</h3>
         </Grid>
-        <Grid item xs={7}>
+        <Grid item xs={12} md={9}>
           <div className="input-title">Supplier</div>
           <InputGroup
             placeholder={'Supplier'}
@@ -84,7 +84,7 @@ export const NewPurchase = () => {
             onChange={(e: React.FormEvent<HTMLInputElement>) => setSupplier(e.currentTarget.value)}
           />
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={12} md={5}>
           <div className="input-title offset-bottom-8">Delivery Date</div>
           <DateInput
             formatDate={date => date.toLocaleDateString()}
@@ -95,7 +95,7 @@ export const NewPurchase = () => {
             value={deliveryDate}
           />
         </Grid>
-        <Grid item xs={7}>
+        <Grid item xs={12} md={9}>
           <Grid container spacing={2} justify={'space-between'} alignItems={'flex-end'}>
             <Grid item>
               <h3 className="bp3-heading offset-top-24">Books</h3>
@@ -116,7 +116,7 @@ export const NewPurchase = () => {
             />
           ))}
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={12}>
           <Button
             text={'Add Purchase'}
             intent={'primary'}

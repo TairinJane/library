@@ -34,7 +34,7 @@ export const ReadersSearchControls = () => {
           onChange={(e: React.FormEvent<HTMLInputElement>) => setLastName(e.currentTarget.value)}
         />
       </Grid>
-      <Grid item xs>
+      <Grid item xs={1}>
         <Button icon={'search'} intent={'primary'} onClick={handleSearch} />
       </Grid>
     </Grid>

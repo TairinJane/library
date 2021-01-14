@@ -14,7 +14,7 @@ type Props = {
 export const BookInput = ({ index, isbn, amount, onIsbnChange, onAmountChange, deleteBook }: Props) => {
   const [valid, setValid] = useState(true);
   return (
-    <Grid container spacing={2} alignItems={'flex-end'}>
+    <Grid container spacing={2} alignItems={'flex-end'} justify={'space-between'}>
       <Grid item xs={6}>
         <div className="input-title offset-bottom-8">ISBN</div>
         <InputGroup
@@ -34,7 +34,7 @@ export const BookInput = ({ index, isbn, amount, onIsbnChange, onAmountChange, d
           intent={valid ? 'none' : 'danger'}
         />
       </Grid>
-      <Grid item xs={5}>
+      <Grid item xs>
         <div className="input-title offset-bottom-8">Amount</div>
         <NumericInput
           placeholder={'Amount'}
@@ -45,6 +45,7 @@ export const BookInput = ({ index, isbn, amount, onIsbnChange, onAmountChange, d
           max={100}
           minorStepSize={null}
           clampValueOnBlur
+          fill
         />
       </Grid>
       <Grid item xs={1}>
