@@ -39,7 +39,7 @@ class ReadersController(private val readersRepository: ReadersRepository, privat
     @GetMapping("/{id}/history")
     fun history(@PathVariable id: Int): List<BorrowedBook> {
         println("history for $id")
-        return borrowedBooksRepository.findAllByReaderId(id)
+        return borrowedBooksRepository.findAllByReaderIdOrderByBorrowDateDesc(id)
     }
 
     @GetMapping("/{id}/hands")

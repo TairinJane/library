@@ -9,6 +9,7 @@ interface BorrowedBooksRepository: JpaRepository<BorrowedBook, Int> {
 
     //@Query("select b from BorrowedBook b join b.reader r where r.id = ?1")
     fun findAllByReaderId(readerId: Int): List<BorrowedBook>
+    fun findAllByReaderIdOrderByBorrowDateDesc(readerId: Int): List<BorrowedBook>
 
     fun findAllByReader(reader: Reader): List<BorrowedBook>
 

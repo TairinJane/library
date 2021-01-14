@@ -24,7 +24,7 @@ class PurchasesController(
     @GetMapping
     fun allPurchases(): List<Purchase> {
         try {
-            return purchasesRepository.findAllByPurchaseDateAfter(
+            return purchasesRepository.findAllByPurchaseDateAfterOrderByDeliveryDateDesc(
                 LocalDate.now()
                     .minusMonths(6)
             )

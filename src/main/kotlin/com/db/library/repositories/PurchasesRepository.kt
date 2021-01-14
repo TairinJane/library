@@ -7,6 +7,6 @@ import java.time.LocalDate
 
 @Repository
 interface PurchasesRepository: JpaRepository<Purchase, Int> {
-
-    fun findAllByPurchaseDateAfter(purchaseDate: LocalDate): List<Purchase>
+    fun findAllByPurchaseDateAfter(startDate: LocalDate): List<Purchase>
+    fun findAllByPurchaseDateAfterOrderByDeliveryDateDesc(startDate: LocalDate): List<Purchase>
 }
