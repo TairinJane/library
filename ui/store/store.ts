@@ -1,4 +1,4 @@
-import { TLoadable, TLoadableState } from '../utils/state.utils';
+import { defaultLoadableList, TLoadable, TLoadableList, TLoadableState } from '../utils/state.utils';
 
 export type TAuthor = {
   id: number;
@@ -72,16 +72,16 @@ export type TBookRequest = {
 };
 
 export type TPurchaseBook = {
-  id: number;
+  id?: number;
   isbn: string;
   amount: number;
 };
 
 export type TPurchase = {
-  id: number;
-  employee: TEmployee;
+  id?: number;
+  employee?: TEmployee;
   supplier: string;
-  purchaseDate: Date;
+  purchaseDate?: Date;
   deliveryDate: Date;
   books: TPurchaseBook[];
 };
@@ -145,10 +145,11 @@ export const storeReadersDefaults: TReadersStore = {
 };
 
 export type TPurchasesStore = {
-  purchases: TPurchase[];
-} & TLoadable;
+  search: TLoadableList<TPurchase>;
+  add: TLoadable;
+};
 
-export const purchasesStoreDefaults: TPurchasesStore = { purchases: [], ...TLoadableState.DEFAULT };
+export const purchasesStoreDefaults: TPurchasesStore = { search: defaultLoadableList(), add: TLoadableState.DEFAULT };
 
 export type TStore = {
   books: TBooksStore;

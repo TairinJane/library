@@ -9,17 +9,17 @@ export const purchasesReducer = (state = purchasesStoreDefaults, action: TSearch
   return produce(state, draft => {
     switch (action.type) {
       case getType(PurchasesActions.getPurchases.request):
-        draft.isFetching = true;
-        draft.purchases = [];
+        draft.search.isFetching = true;
+        draft.search.entities = [];
         break;
       case getType(PurchasesActions.getPurchases.success):
-        draft.purchases = action.payload;
-        draft.isFetching = false;
-        draft.isLoaded = true;
+        draft.search.entities = action.payload;
+        draft.search.isFetching = false;
+        draft.search.isLoaded = true;
         break;
       case getType(PurchasesActions.getPurchases.failure):
-        draft.isFetching = false;
-        draft.isError = true;
+        draft.search.isFetching = false;
+        draft.search.isError = true;
         break;
     }
   });

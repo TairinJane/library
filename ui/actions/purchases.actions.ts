@@ -7,6 +7,13 @@ const getPurchases = createAsyncAction('PURCHASES/SEARCH_REQ', 'PURCHASES/SEARCH
   [undefined, undefined]
 >();
 
+const newPurchase = createAsyncAction('PURCHASES/NEW_REQ', 'PURCHASES/NEW_SUCCESS', 'PURCHASES/NEW_ERROR')<
+  TPurchase,
+  TPurchase,
+  [undefined, undefined]
+>();
+
 export const PurchasesActions = {
   getPurchases,
+  newPurchase,
 };

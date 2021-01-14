@@ -1,29 +1,32 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TPurchase, TPurchasesStore, TStore } from '../../store/store';
+import { TPurchase, TStore } from '../../store/store';
 import { PurchasesTable } from './purchases-table';
 import { PurchasesThunks } from '../../actions/purchases.thunks';
 import { Alert } from '@blueprintjs/core';
 import { Cell, Column, SelectionModes, Table } from '@blueprintjs/table';
+import { TLoadableList } from '../../utils/state.utils';
 
 export const PurchasesSearchPage = () => {
   const dispatch = useDispatch();
 
-  const { purchases, isFetching, isLoaded } = useSelector<TStore, TPurchasesStore>(store => store.purchases);
+  const { entities: search, isFetching, isLoaded } = useSelector<TStore, TLoadableList<TPurchase>>(
+    store => store.purchases.search,
+  );
   const [selectedPurchase, setSelectedPurchase] = useState<TPurchase>();
   const [isOpen, setOpen] = useState(false);
 
   useEffect(() => {
-    if (!purchases.length && !isFetching && !isLoaded) dispatch(PurchasesThunks.getPurchases());
-  }, [purchases, isFetching, isLoaded]);
+    if (!search.length && !isFetching && !isLoaded) dispatch(PurchasesThunks.getPurchases());
+  }, [search, isFetching, isLoaded]);
 
   const onPurchaseSelect = useCallback(
     (rowIndex: number) => {
-      const purchase = purchases[rowIndex];
+      const purchase = search[rowIndex];
       setSelectedPurchase(purchase);
       setOpen(true);
     },
-    [purchases],
+    [search],
   );
 
   const onConfirm = useCallback(() => {
@@ -33,12 +36,12 @@ export const PurchasesSearchPage = () => {
   return (
     <>
       <h1 className="bp3-heading offset-bottom-24">Purchases (Last Half of Year)</h1>
-      {!!purchases?.length && isLoaded ? (
-        <PurchasesTable purchases={purchases} onRowClick={onPurchaseSelect} />
+      {!!search?.length && isLoaded ? (
+        <PurchasesTable purchases={search} onRowClick={onPurchaseSelect} />
       ) : (
-        <div className="offset-top-24 text-center">No results</div>
+        <div className="offset-top-24 text-center">{isFetching ? 'Loading purchases...' : 'No results'}</div>
       )}
-      <Alert confirmButtonText="Ok" isOpen={isOpen} onConfirm={onConfirm}>
+      <Alert confirmButtonText="Ok" isOpen={isOpen} onConfirm={onConfirm} canOutsideClickCancel>
         <h5 className="bp3-heading offset-bottom-24">Purchase {selectedPurchase?.id}</h5>
         <p>{selectedPurchase?.supplier ?? ''}</p>
         <p>Purchase Date: {selectedPurchase?.purchaseDate ?? ''}</p>

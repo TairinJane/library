@@ -24,3 +24,14 @@ export const TLoadableState: Record<'SUCCESS' | 'REQUEST' | 'ERROR' | 'DEFAULT',
     isFetching: false,
   },
 };
+
+export type TLoadableList<T> = {
+  entities: T[];
+} & TLoadable;
+
+export function defaultLoadableList<T>(): TLoadableList<T> {
+  return {
+    entities: [],
+    ...TLoadableState.DEFAULT,
+  } as TLoadableList<T>;
+}
