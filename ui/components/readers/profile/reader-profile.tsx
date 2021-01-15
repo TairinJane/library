@@ -16,14 +16,12 @@ export const ReaderProfile = ({ match }: RouteComponentProps<{ id?: string }>) =
   const [isOpen, setOpen] = useState(false);
 
   useEffect(() => {
-    if (!!reader) return;
-    dispatch(ReadersThunks.getReaderInfo(readerId));
-  }, [reader]);
+    if (!reader) dispatch(ReadersThunks.getReaderInfo(readerId));
+  }, [reader, readerId]);
 
   useEffect(() => {
-    if (!!history) return;
-    dispatch(ReadersThunks.getReaderHistory(readerId));
-  }, [reader]);
+    if (!history) dispatch(ReadersThunks.getReaderHistory(readerId));
+  }, [history, readerId]);
 
   const onBookSelect = useCallback(
     (rowIndex: number) => {

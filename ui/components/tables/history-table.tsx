@@ -31,17 +31,18 @@ export const HistoryTable = ({ books, onRowClick, readerColumn = false }: Props)
   );
 
   const columns = useMemo(() => {
+    const booksOnHands = books.reduce((count, book) => (!!book.returnDate ? count + 1 : count), 0);
     const predefinedColumns: React.ReactElement<IColumnProps>[] = [
       <Column name={'Title'} cellRenderer={titleCellRenderer} key={0} />,
       <Column name={'Author'} cellRenderer={authorCellRenderer} key={1} />,
       <Column name={'Reader'} cellRenderer={readerCellRenderer} key={2} />,
       <Column name={'Borrow Date'} cellRenderer={borrowRenderer} key={3} />,
       <Column name={'Due Date'} cellRenderer={dueRenderer} key={4} />,
-      <Column name={'Return Date'} cellRenderer={returnRenderer} key={5} />,
+      <Column name={'Return Date'} cellRenderer={returnRenderer} key={booksOnHands} />,
     ];
     if (!readerColumn) return predefinedColumns.filter(column => column.props.name != 'Reader');
     else return predefinedColumns;
-  }, [readerColumn]);
+  }, [readerColumn, books]);
 
   return (
     <Table

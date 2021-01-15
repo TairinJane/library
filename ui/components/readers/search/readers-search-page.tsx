@@ -15,7 +15,7 @@ export const ReadersSearchPage = () => {
     (rowIndex: number) => {
       const reader = readers[rowIndex];
       dispatch(ReadersActions.saveReaderInfo(reader));
-      history.push(`/reader/${reader.id}`);
+      history.push(`/readers/${reader.id}`);
     },
     [readers],
   );
