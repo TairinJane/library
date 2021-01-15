@@ -67,6 +67,7 @@ export const NewEvent = () => {
             intent={'primary'}
             disabled={!place || !title || !date || isFetching}
             onClick={onAddButtonClick}
+            className="offset-top-24"
           />
         </Grid>
       </Grid>

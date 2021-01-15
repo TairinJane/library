@@ -78,6 +78,7 @@ export const NewReaderPage = () => {
             intent={'primary'}
             disabled={!firstName || !lastName || !date || isFetching}
             onClick={onAddButtonClick}
+            className="offset-top-24"
           />
         </Grid>
       </Grid>
