@@ -18,15 +18,16 @@ export const NewPurchase = () => {
   const [supplier, setSupplier] = useState('');
   const [deliveryDate, setDeliveryDate] = useState<Date>();
   const [books, setBooks] = useState<TPurchaseBook[]>([emptyBook]);
+  const [added, setAdded] = useState(false);
 
   useEffect(() => {
-    if (isLoaded) {
-      history.push('/');
+    if (isLoaded && added) {
+      history.push('/purchases');
     }
-  }, [isLoaded]);
+  }, [isLoaded, added]);
 
   const onAddButtonClick = useCallback(() => {
-    if (books.every(book => book.isbn.length == 13))
+    if (books.every(book => book.isbn.length == 13)) {
       dispatch(
         PurchasesThunks.newPurchase({
           supplier,
@@ -34,6 +35,8 @@ export const NewPurchase = () => {
           books,
         }),
       );
+      setAdded(true);
+    }
   }, [supplier, deliveryDate, books]);
 
   const addBook = useCallback(() => {
@@ -122,6 +125,7 @@ export const NewPurchase = () => {
             intent={'primary'}
             disabled={!supplier || !deliveryDate || isFetching}
             onClick={onAddButtonClick}
+            className="offset-top-24"
           />
         </Grid>
       </Grid>

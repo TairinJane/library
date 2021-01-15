@@ -2,28 +2,38 @@ import { ActionType, getType } from 'typesafe-actions';
 import { purchasesStoreDefaults, TPurchasesStore } from '../store/store';
 import produce from 'immer';
 import { PurchasesActions } from '../actions/purchases.actions';
+import { TLoadableState } from '../utils/state.utils';
 
-type TSearchActions = ActionType<typeof PurchasesActions>;
+type TPurchasesActions = ActionType<typeof PurchasesActions>;
 
-export const purchasesReducer = (state = purchasesStoreDefaults, action: TSearchActions): TPurchasesStore => {
+export const purchasesReducer = (state = purchasesStoreDefaults, action: TPurchasesActions): TPurchasesStore => {
   return produce(state, draft => {
     switch (action.type) {
       case getType(PurchasesActions.getPurchases.request):
-        draft.search.isFetching = true;
-        draft.search.entities = [];
+        draft.search = { ...TLoadableState.REQUEST, entities: [] };
         break;
       case getType(PurchasesActions.getPurchases.success):
-        draft.search.entities = action.payload;
-        draft.search.isFetching = false;
-        draft.search.isLoaded = true;
+        draft.search = { ...TLoadableState.SUCCESS, entities: action.payload };
         break;
       case getType(PurchasesActions.getPurchases.failure):
-        draft.search.isFetching = false;
-        draft.search.isError = true;
+        draft.search = { ...state.search, ...TLoadableState.ERROR };
+        break;
+      case getType(PurchasesActions.newPurchase.request):
+        draft.add = TLoadableState.REQUEST;
         break;
       case getType(PurchasesActions.newPurchase.success):
-        const purchases = state.search.entities;
-        if (!!purchases?.length) draft.search.entities = [action.payload, ...purchases];
+        if (!!state.search.entities?.length) {
+          const index = draft.search.entities.findIndex(
+            purchase => purchase.deliveryDate < action.payload.deliveryDate,
+          );
+          if (index != -1) draft.search.entities.splice(index, 0, action.payload);
+          else draft.search.entities.push(action.payload);
+        }
+        draft.add = TLoadableState.SUCCESS;
+        break;
+      case getType(PurchasesActions.newPurchase.failure):
+        draft.add = TLoadableState.ERROR;
+        break;
     }
   });
 };

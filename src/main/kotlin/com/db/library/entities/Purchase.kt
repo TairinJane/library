@@ -7,6 +7,9 @@ import javax.persistence.*
 @Entity
 @Table(name = "purchases")
 class Purchase(
+        @JsonManagedReference
+        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "purchase")
+        var books: List<PurchaseBook> = emptyList(),
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "employee_id")
         var employee: Employee,
@@ -17,8 +20,4 @@ class Purchase(
         @Column(name = "purchase_id")
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Int = 0
-) {
-        @JsonManagedReference
-        @OneToMany(cascade = [CascadeType.ALL], mappedBy = "purchase")
-        var books: List<PurchaseBook> = emptyList()
-}
+)

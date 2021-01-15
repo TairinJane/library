@@ -30,7 +30,7 @@ export const PurchasesSearchPage = () => {
 
   return (
     <>
-      <h1 className="bp3-heading offset-bottom-24">Purchases (Last Half of Year)</h1>
+      <h1 className="bp3-heading offset-bottom-24">Purchases (Last 6 months)</h1>
       {!!search?.length && isLoaded ? (
         <PurchasesTable purchases={search} onRowClick={onPurchaseSelect} />
       ) : (

@@ -4,7 +4,6 @@ import com.db.library.dto.PurchaseDTO
 import com.db.library.entities.Purchase
 import com.db.library.entities.PurchaseBook
 import com.db.library.repositories.EmployeesRepository
-import com.db.library.repositories.PurchasesBooksRepository
 import com.db.library.repositories.PurchasesRepository
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -18,7 +17,6 @@ import javax.validation.Valid
 class PurchasesController(
     private val purchasesRepository: PurchasesRepository,
     private val employeesRepository: EmployeesRepository,
-    private val purchasesBooksRepository: PurchasesBooksRepository
 ) {
 
     @GetMapping
