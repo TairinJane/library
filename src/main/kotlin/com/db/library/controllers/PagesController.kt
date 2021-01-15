@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping
 @Controller
 class PagesController {
 
-    @GetMapping("/", "/search/**", "/reader/**", "/book/**", "/lend", "/due", "/purchase/**")
+    @GetMapping("/", "/readers/**", "/books/**", "/purchases/**", "/events/**")
     fun index() = "index"
 }

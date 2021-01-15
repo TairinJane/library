@@ -6,4 +6,5 @@ import com.db.library.entities.Event
 
 @Repository
 interface EventsRepository: JpaRepository<Event, Int> {
+    fun findAllByOrderByEventDateDesc(): List<Event>
 }

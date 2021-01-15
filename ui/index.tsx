@@ -18,6 +18,8 @@ import { DuePage } from './components/due/due-page';
 import { NewReaderPage } from './components/readers/new/new-reader-page';
 import { PurchasesSearchPage } from './components/purchases/purchase-search';
 import { NewPurchase } from './components/purchases/new-purchase';
+import { NewEvent } from './components/events/new-event';
+import { EventsSearch } from './components/events/events-search';
 
 const App = () => {
   const store = configureStore();
@@ -29,14 +31,16 @@ const App = () => {
           <Container>
             <Switch>
               <Route exact path="/" component={HomePage} />
-              <Route exact path="/search/books" component={BooksSearchPage} />
-              <Route exact path="/search/readers" component={ReadersSearchPage} />
-              <Route exact path="/search/purchases" component={PurchasesSearchPage} />
-              <Route exact path="/lend" component={LendPage} />
-              <Route exact path="/due" component={DuePage} />
-              <Route exact path="/reader/new" component={NewReaderPage} />
-              <Route exact path="/reader/:id" component={ReaderProfile} />
-              <Route exact path="/purchase/new" component={NewPurchase} />
+              <Route exact path="/books" component={BooksSearchPage} />
+              <Route exact path="/books/lend" component={LendPage} />
+              <Route exact path="/books/due" component={DuePage} />
+              <Route exact path="/purchases" component={PurchasesSearchPage} />
+              <Route exact path="/purchases/new" component={NewPurchase} />
+              <Route exact path="/readers" component={ReadersSearchPage} />
+              <Route exact path="/readers/new" component={NewReaderPage} />
+              <Route exact path="/readers/:id" component={ReaderProfile} />
+              <Route exact path="/events" component={EventsSearch} />
+              <Route exact path="/events/new" component={NewEvent} />
               <Route render={() => <div>No such page</div>} />
             </Switch>
           </Container>

@@ -87,9 +87,9 @@ export type TPurchase = {
 };
 
 export type TEvent = {
-  id: number;
+  id?: number;
   title: string;
-  employee: TEmployee;
+  employee?: TEmployee;
   eventDate: Date;
   eventPlace: string;
 };
@@ -151,14 +151,23 @@ export type TPurchasesStore = {
 
 export const purchasesStoreDefaults: TPurchasesStore = { search: defaultLoadableList(), add: TLoadableState.DEFAULT };
 
+export type TEventsStore = {
+  search: TLoadableList<TEvent>;
+  add: TLoadable;
+};
+
 export type TStore = {
   books: TBooksStore;
   readers: TReadersStore;
   purchases: TPurchasesStore;
+  events: TEventsStore;
 };
+
+export const eventsStoreDefaults: TEventsStore = { search: defaultLoadableList(), add: TLoadableState.DEFAULT };
 
 export const storeDefaults: TStore = {
   readers: storeReadersDefaults,
   books: booksStoreDefaults,
   purchases: purchasesStoreDefaults,
+  events: eventsStoreDefaults,
 };

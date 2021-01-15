@@ -8,14 +8,17 @@ export const NavBar = () => {
       <List>
         <ListItemLink text={'Home'} to={'/'} />
         <Divider />
-        <ListItemLink text={'Books Search'} to={'/search/books'} />
-        <ListItemLink text={'Lend Book'} to={'/lend'} />
+        <ListItemLink text={'Books Search'} to={'/books'} />
+        <ListItemLink text={'Lend Book'} to={'/books/lend'} />
         <Divider />
-        <ListItemLink text={'Readers Search'} to={'/search/readers'} />
-        <ListItemLink text={'New Reader'} to={'/reader/new'} />
+        <ListItemLink text={'Readers Search'} to={'/readers'} />
+        <ListItemLink text={'New Reader'} to={'/readers/new'} />
         <Divider />
-        <ListItemLink text={'Purchases'} to={'/search/purchases'} />
-        <ListItemLink text={'New Purchase'} to={'/purchase/new'} />
+        <ListItemLink text={'Purchases'} to={'/purchases'} />
+        <ListItemLink text={'New Purchase'} to={'/purchases/new'} />
+        <Divider />
+        <ListItemLink text={'Events'} to={'/events'} />
+        <ListItemLink text={'New Event'} to={'/events/new'} />
       </List>
     </Drawer>
   );
