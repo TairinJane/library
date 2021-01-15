@@ -15,22 +15,24 @@ export const NewEvent = () => {
   const [title, setTitle] = useState('');
   const [place, setPlace] = useState('');
   const [date, setDate] = useState<Date>();
+  const [added, setAdded] = useState(false);
 
   useEffect(() => {
-    if (isLoaded) {
-      history.push('/');
+    if (isLoaded && added) {
+      history.push('/events');
     }
-  }, [isLoaded]);
+  }, [isLoaded, added]);
 
   const onAddButtonClick = useCallback(() => {
     dispatch(EventsThunks.newEvent({ title, eventPlace: place, eventDate: date }));
+    setAdded(true);
   }, [place, title, date]);
 
   return (
     <>
       <h1 className="bp3-heading offset-bottom-24">New Event</h1>
       <Grid container spacing={2} wrap={'wrap'} direction={'column'}>
-        <Grid item xs={5}>
+        <Grid item xs={8}>
           <div className="input-title">Title</div>
           <InputGroup
             placeholder={'Title'}
@@ -39,7 +41,7 @@ export const NewEvent = () => {
             onChange={(e: React.FormEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)}
           />
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={8}>
           <div className="input-title">Place</div>
           <InputGroup
             placeholder={'Place'}
@@ -48,7 +50,7 @@ export const NewEvent = () => {
             onChange={(e: React.FormEvent<HTMLInputElement>) => setPlace(e.currentTarget.value)}
           />
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={8}>
           <div className="input-title offset-bottom-8">Date</div>
           <DateInput
             formatDate={date => date.toLocaleDateString()}

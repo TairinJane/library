@@ -2,6 +2,7 @@ import { ActionType, getType } from 'typesafe-actions';
 import { eventsStoreDefaults, TEventsStore } from '../store/store';
 import produce from 'immer';
 import { EventsActions } from '../actions/events.actions';
+import { TLoadableState } from '../utils/state.utils';
 
 type TEventsActions = ActionType<typeof EventsActions>;
 
@@ -9,21 +10,28 @@ export const eventsReducer = (state = eventsStoreDefaults, action: TEventsAction
   return produce(state, draft => {
     switch (action.type) {
       case getType(EventsActions.getEvents.request):
-        draft.search.isFetching = true;
-        draft.search.entities = [];
+        draft.search = { ...TLoadableState.REQUEST, entities: [] };
         break;
       case getType(EventsActions.getEvents.success):
-        draft.search.entities = action.payload;
-        draft.search.isFetching = false;
-        draft.search.isLoaded = true;
+        draft.search = { ...TLoadableState.SUCCESS, entities: action.payload };
         break;
       case getType(EventsActions.getEvents.failure):
-        draft.search.isFetching = false;
-        draft.search.isError = true;
+        draft.search = { ...state.search, ...TLoadableState.ERROR };
+        break;
+      case getType(EventsActions.newEvent.request):
+        draft.add = TLoadableState.REQUEST;
         break;
       case getType(EventsActions.newEvent.success):
         const events = state.search.entities;
-        if (!!events?.length) draft.search.entities = [action.payload, ...events];
+        if (events?.length) {
+          const index = events.findIndex(event => event.eventDate < action.payload.eventDate);
+          if (index != -1) draft.search.entities.splice(index, 0, action.payload);
+          else draft.search.entities.push(action.payload);
+        }
+        draft.add = TLoadableState.SUCCESS;
+        break;
+      case getType(EventsActions.newEvent.failure):
+        draft.add = TLoadableState.ERROR;
     }
   });
 };
