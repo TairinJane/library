@@ -4,7 +4,7 @@ import { TEvent } from '../store/store';
 const getEvents = async (): Promise<TEvent[]> => {
   const resp = await fetch(toApiURL('/events'));
   if (resp.ok) return await resp.json();
-  return null;
+  else throw Error(resp.statusText);
 };
 
 const newEvent = async (event: TEvent): Promise<TEvent> => {
@@ -16,7 +16,7 @@ const newEvent = async (event: TEvent): Promise<TEvent> => {
     body: JSON.stringify(event),
   });
   if (resp.ok) return await resp.json();
-  return null;
+  else throw Error(resp.statusText);
 };
 
 export const EventsApi = {

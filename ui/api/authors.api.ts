@@ -6,7 +6,7 @@ const getAuthors = async (firstName?: string, lastName?: string): Promise<TAutho
   const request = { firstName, lastName };
   const resp = await fetch(toApiURL('/authors?') + stringify(request, { skipNull: true, skipEmptyString: true }));
   if (resp.ok) return await resp.json();
-  return null;
+  else throw Error(resp.statusText);
 };
 
 const newAuthor = async (author: TAuthor): Promise<TAuthor> => {
@@ -24,13 +24,13 @@ const newAuthor = async (author: TAuthor): Promise<TAuthor> => {
 const getAuthorInfo = async (authorId: number): Promise<TAuthor> => {
   const resp = await fetch(toApiURL(`/authors/${authorId}`));
   if (resp.ok) return await resp.json();
-  return null;
+  else throw Error(resp.statusText);
 };
 
 const getBooks = async (authorId: number): Promise<TBook[]> => {
   const resp = await fetch(toApiURL(`/authors/${authorId}/books`));
   if (resp.ok) return await resp.json();
-  return null;
+  else throw Error(resp.statusText);
 };
 
 export const AuthorsApi = {

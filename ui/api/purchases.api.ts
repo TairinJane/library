@@ -4,7 +4,7 @@ import { TPurchase } from '../store/store';
 const getPurchases = async (): Promise<TPurchase[]> => {
   const resp = await fetch(toApiURL('/purchases'));
   if (resp.ok) return await resp.json();
-  return null;
+  else throw Error(resp.statusText);
 };
 
 const newPurchase = async (purchase: TPurchase): Promise<TPurchase> => {
@@ -16,7 +16,7 @@ const newPurchase = async (purchase: TPurchase): Promise<TPurchase> => {
     body: JSON.stringify(purchase),
   });
   if (resp.ok) return await resp.json();
-  return null;
+  else throw Error(resp.statusText);
 };
 
 export const PurchasesApi = {
