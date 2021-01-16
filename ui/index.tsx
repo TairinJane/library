@@ -11,7 +11,7 @@ import { Container } from '@material-ui/core';
 import { Provider } from 'react-redux';
 import { configureStore } from './store/configure.store';
 import { ReadersSearchPage } from './components/readers/search/readers-search-page';
-import { LendPage } from './components/lend-books/lend-page';
+import { LendPage } from './components/lend/lend-page';
 import { ReaderProfile } from './components/readers/profile/reader-profile';
 import { HomePage } from './components/home/home-page';
 import { DuePage } from './components/due/due-page';
@@ -20,6 +20,9 @@ import { PurchasesSearchPage } from './components/purchases/purchase-search';
 import { NewPurchase } from './components/purchases/new-purchase';
 import { NewEvent } from './components/events/new-event';
 import { EventsSearch } from './components/events/events-search';
+import { AuthorsSearch } from './components/authors/author-search';
+import { NewAuthor } from './components/authors/new-author';
+import { AuthorProfile } from './components/authors/profile';
 
 const App = () => {
   const store = configureStore();
@@ -41,6 +44,9 @@ const App = () => {
               <Route exact path="/readers/:id" component={ReaderProfile} />
               <Route exact path="/events" component={EventsSearch} />
               <Route exact path="/events/new" component={NewEvent} />
+              <Route exact path="/authors" component={AuthorsSearch} />
+              <Route exact path="/authors/new" component={NewAuthor} />
+              <Route exact path="/authors/:id" component={AuthorProfile} />
               <Route render={() => <div>No such page</div>} />
             </Switch>
           </Container>

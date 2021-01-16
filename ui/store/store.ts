@@ -1,7 +1,7 @@
 import { defaultLoadableList, TLoadable, TLoadableList, TLoadableState } from '../utils/state.utils';
 
 export type TAuthor = {
-  id: number;
+  id?: number;
   firstName: string;
   lastName: string;
   patronymic?: string;
@@ -138,7 +138,7 @@ export type TReadersStore = {
   add: TLoadable;
 };
 
-export const storeReadersDefaults: TReadersStore = {
+export const readersStoreDefaults: TReadersStore = {
   search: [],
   add: TLoadableState.DEFAULT,
   profiles: {},
@@ -156,18 +156,37 @@ export type TEventsStore = {
   add: TLoadable;
 };
 
+export const eventsStoreDefaults: TEventsStore = { search: defaultLoadableList(), add: TLoadableState.DEFAULT };
+
+export type TAuthorProfile = {
+  author?: TAuthor;
+  books?: TBook[];
+} & TLoadable;
+
+export type TAuthorsStore = {
+  search: TLoadableList<TAuthor>;
+  add: TLoadable;
+  profiles: Record<number, TAuthorProfile>;
+};
+
+export const authorsStoreDefaults: TAuthorsStore = {
+  search: defaultLoadableList(),
+  add: TLoadableState.DEFAULT,
+  profiles: {},
+};
+
 export type TStore = {
   books: TBooksStore;
   readers: TReadersStore;
   purchases: TPurchasesStore;
   events: TEventsStore;
+  authors: TAuthorsStore;
 };
 
-export const eventsStoreDefaults: TEventsStore = { search: defaultLoadableList(), add: TLoadableState.DEFAULT };
-
 export const storeDefaults: TStore = {
-  readers: storeReadersDefaults,
+  readers: readersStoreDefaults,
   books: booksStoreDefaults,
   purchases: purchasesStoreDefaults,
   events: eventsStoreDefaults,
+  authors: authorsStoreDefaults,
 };

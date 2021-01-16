@@ -14,6 +14,9 @@ export const NavBar = () => {
         <ListItemLink text={'Readers Search'} to={'/readers'} />
         <ListItemLink text={'New Reader'} to={'/readers/new'} />
         <Divider />
+        <ListItemLink text={'Authors'} to={'/authors'} />
+        <ListItemLink text={'New Author'} to={'/authors/new'} />
+        <Divider />
         <ListItemLink text={'Purchases'} to={'/purchases'} />
         <ListItemLink text={'New Purchase'} to={'/purchases/new'} />
         <Divider />

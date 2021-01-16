@@ -27,7 +27,7 @@ class BooksController(private val booksRepository: BooksRepository,
               @RequestParam(defaultValue = "false") available: Boolean): List<BookAvailableDTO> {
         println("request: $title $authorFirstName $authorLastName")
         val result: List<Book> = if (authorFirstName.isNotEmpty() && authorLastName.isNotEmpty())
-            booksRepository.findAllByAuthor(authorFirstName, authorLastName)
+            booksRepository.findAllByAuthorFirstNameAndLastName(authorFirstName, authorLastName)
         else if (authorFirstName.isNotEmpty())
             booksRepository.findAllByAuthorFirstName(authorFirstName)
         else if (authorLastName.isNotEmpty())

@@ -1,5 +1,6 @@
 package com.db.library.repositories
 
+import com.db.library.entities.Author
 import com.db.library.entities.Book
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
@@ -11,8 +12,10 @@ interface BooksRepository: JpaRepository<Book, Int> {
 
     fun findAllByTitleContainingIgnoreCase(title: String): List<Book>
 
+    fun findAllByAuthors(author: Author): List<Book>
+
     @Query("select b from Book b join b.authors a where a.firstName = ?1 and a.lastName = ?2")
-    fun findAllByAuthor(authorFirstName: String, authorLastName: String): List<Book>
+    fun findAllByAuthorFirstNameAndLastName(authorFirstName: String, authorLastName: String): List<Book>
 
     @Query("select b from Book b join b.authors a where a.lastName = ?1")
     fun findAllByAuthorLastName(authorLastName: String): List<Book>

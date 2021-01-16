@@ -1,12 +1,12 @@
 import { ActionType, getType } from 'typesafe-actions';
-import { storeReadersDefaults, TReadersStore } from '../store/store';
+import { readersStoreDefaults, TReadersStore } from '../store/store';
 import produce from 'immer';
 import { ReadersActions } from '../actions/readers/readers.actions';
 import { TLoadableState } from '../utils/state.utils';
 
 type TReadersActions = ActionType<typeof ReadersActions>;
 
-export const readersReducer = (state = storeReadersDefaults, action: TReadersActions): TReadersStore => {
+export const readersReducer = (state = readersStoreDefaults, action: TReadersActions): TReadersStore => {
   return produce(state, draft => {
     switch (action.type) {
       case getType(ReadersActions.saveReaderInfo):

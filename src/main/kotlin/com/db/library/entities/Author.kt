@@ -12,9 +12,9 @@ class Author(
         @Size(max = 50)
         var lastName: String,
         @Size(max = 50)
-        var patronymic: String,
+        var patronymic: String?,
         var birthDate: LocalDate,
-        var deathDate: LocalDate,
+        var deathDate: LocalDate?,
         @Id
         @Column(name = "author_id")
         @GeneratedValue(strategy = GenerationType.IDENTITY)
