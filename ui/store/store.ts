@@ -110,7 +110,6 @@ export type TBookProfile = {
   info?: TBookInfo;
   history?: TLoadableList<TBorrowedBook>;
   reserved?: TLoadableList<TReservedBook>;
-  hands?: TLoadableList<TBorrowedBook>;
 };
 
 export type TBooksStore = {

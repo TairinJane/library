@@ -1,6 +1,6 @@
 import { ActionType, getType } from 'typesafe-actions';
 import { BookActions } from '../actions/books/books.actions';
-import { booksStoreDefaults, TBooksStore, TBorrowedBook } from '../store/store';
+import { booksStoreDefaults, TBooksStore } from '../store/store';
 import produce from 'immer';
 import { TLoadableState } from '../utils/state.utils';
 
@@ -64,24 +64,18 @@ export const booksReducer = (state = booksStoreDefaults, action: TSearchActions)
         draft.profiles[action.payload] = {
           ...state.profiles[action.payload],
           history: { ...TLoadableState.SUCCESS, entities: [] },
-          hands: { ...TLoadableState.SUCCESS, entities: [] },
         };
         break;
       case getType(BookActions.getHistory.success):
-        const history: TBorrowedBook[] = [];
-        const hands: TBorrowedBook[] = [];
-        action.payload.forEach(book => (book.returnDate ? history.push(book) : hands.push(book)));
         draft.profiles[action.meta] = {
           ...state.profiles[action.meta],
-          history: { ...TLoadableState.SUCCESS, entities: history },
-          hands: { ...TLoadableState.SUCCESS, entities: hands },
+          history: { ...TLoadableState.SUCCESS, entities: action.payload },
         };
         break;
       case getType(BookActions.getHistory.failure):
         draft.profiles[action.payload] = {
           ...state.profiles[action.payload],
           history: { ...TLoadableState.ERROR, entities: [] },
-          hands: { ...TLoadableState.ERROR, entities: [] },
         };
     }
   });
