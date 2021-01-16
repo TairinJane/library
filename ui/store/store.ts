@@ -103,28 +103,28 @@ export type TLend = {
 export const lendDefaults: TLend = { isSuccess: false };
 
 export type TBookInfo = {
-  book: TBook;
-  history: TBorrowedBook[];
-};
-
-export type TDueBooks = {
-  books: TBorrowedBook[];
+  book?: TBook;
 } & TLoadable;
 
-export const dueBooksDefaults: TDueBooks = { books: [], ...TLoadableState.DEFAULT };
+export type TBookProfile = {
+  info?: TBookInfo;
+  history?: TLoadableList<TBorrowedBook>;
+  reserved?: TLoadableList<TReservedBook>;
+  hands?: TLoadableList<TBorrowedBook>;
+};
 
 export type TBooksStore = {
   search: TBook[];
   lend: TLend;
-  profiles: Record<number, TBookInfo>;
-  due: TDueBooks;
+  profiles: Record<number, TBookProfile>;
+  due: TLoadableList<TBorrowedBook>;
 };
 
 export const booksStoreDefaults: TBooksStore = {
   search: [],
   lend: lendDefaults,
   profiles: {},
-  due: dueBooksDefaults,
+  due: defaultLoadableList(),
 };
 
 export type TReaderInfo = {

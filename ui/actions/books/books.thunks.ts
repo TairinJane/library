@@ -31,8 +31,38 @@ const fetchDueBooks = () => {
   };
 };
 
+const getBookInfo = (bookId: number) => {
+  return (dispatch: Dispatch) => {
+    dispatch(BookActions.getBookInfo.request(bookId));
+    return BooksApi.getBookInfo(bookId)
+      .then(json => dispatch(BookActions.getBookInfo.success(json, bookId)))
+      .catch(() => dispatch(BookActions.getBookInfo.failure(bookId)));
+  };
+};
+
+const getHistory = (bookId: number) => {
+  return (dispatch: Dispatch) => {
+    dispatch(BookActions.getHistory.request(bookId));
+    return BooksApi.getHistory(bookId)
+      .then(json => dispatch(BookActions.getHistory.success(json, bookId)))
+      .catch(() => dispatch(BookActions.getHistory.failure(bookId)));
+  };
+};
+
+const getReserved = (bookId: number) => {
+  return (dispatch: Dispatch) => {
+    dispatch(BookActions.getReserved.request(bookId));
+    return BooksApi.getReserved(bookId)
+      .then(json => dispatch(BookActions.getReserved.success(json, bookId)))
+      .catch(() => dispatch(BookActions.getReserved.failure(bookId)));
+  };
+};
+
 export const BooksThunks = {
   findBooks,
   lendBook,
   fetchDueBooks,
+  getBookInfo,
+  getHistory,
+  getReserved,
 };

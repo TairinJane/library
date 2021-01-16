@@ -21,6 +21,8 @@ interface BorrowedBooksRepository: JpaRepository<BorrowedBook, Int> {
 
     fun findAllByBookId(bookId: Int): List<BorrowedBook>
 
+    fun findAllByBookIdOrderByBorrowDateDesc(bookId: Int): List<BorrowedBook>
+
     fun findAllByReturnDateIsNullAndBookId(bookId: Int): List<BorrowedBook>
 
     fun countAllByBookIdAndReturnDateIsNull(bookId: Int): Int

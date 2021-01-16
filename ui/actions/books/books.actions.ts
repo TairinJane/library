@@ -1,5 +1,5 @@
 import { createAction, createAsyncAction } from 'typesafe-actions';
-import { TBook, TBorrowedBook } from '../../store/store';
+import { TBook, TBorrowedBook, TReservedBook } from '../../store/store';
 
 type TBooksMeta = { title?: string; authorFirstName?: string; authorLastName?: string };
 
@@ -29,9 +29,33 @@ const fetchDueBooks = createAsyncAction('BOOKS/DUE_BOOKS_REQ', 'BOOKS/DUE_BOOKS_
   [undefined, undefined]
 >();
 
+const getBookInfo = createAsyncAction('BOOKS/GET_INFO_REQ', 'BOOKS/GET_INFO_SUCCESS', 'BOOKS/GET_INFO_ERROR')<
+  number,
+  [TBook, number],
+  number
+>();
+
+const getHistory = createAsyncAction('BOOKS/GET_HISTORY_REQ', 'BOOKS/GET_HISTORY_SUCCESS', 'BOOKS/GET_HISTORY_ERROR')<
+  number,
+  [TBorrowedBook[], number],
+  number
+>();
+
+const getReserved = createAsyncAction(
+  'BOOKS/GET_RESERVED_REQ',
+  'BOOKS/GET_RESERVED_SUCCESS',
+  'BOOKS/GET_RESERVED_ERROR',
+)<number, [TReservedBook[], number], number>();
+
+const saveBookInfo = createAction('BOOKS/SAVE_AUTHOR_INFO')<TBook>();
+
 export const BookActions = {
   findBooks,
   lendBook,
   clearLendInfo,
   fetchDueBooks,
+  getBookInfo,
+  getHistory,
+  getReserved,
+  saveBookInfo,
 };

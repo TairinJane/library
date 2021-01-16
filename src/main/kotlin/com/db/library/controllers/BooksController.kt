@@ -4,10 +4,8 @@ import com.db.library.dto.BookAvailableDTO
 import com.db.library.dto.toBookAvailableDTO
 import com.db.library.entities.Book
 import com.db.library.entities.BorrowedBook
-import com.db.library.repositories.BooksRepository
-import com.db.library.repositories.BorrowedBooksRepository
-import com.db.library.repositories.EmployeesRepository
-import com.db.library.repositories.ReadersRepository
+import com.db.library.entities.ReservedBook
+import com.db.library.repositories.*
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
@@ -17,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException
 @RequestMapping("/api/books")
 class BooksController(private val booksRepository: BooksRepository,
                       private val borrowedBooksRepository: BorrowedBooksRepository,
+                      private val reservedBooksRepository: ReservedBooksRepository,
                       private val readersRepository: ReadersRepository,
                       private val employeesRepository: EmployeesRepository) {
 
@@ -43,10 +42,22 @@ class BooksController(private val booksRepository: BooksRepository,
         else availability
     }
 
+    @GetMapping("/{id}")
+    fun getBook(@PathVariable id: Int): Book {
+        println("book $id")
+        return booksRepository.getOne(id)
+    }
+
     @GetMapping("/{id}/history")
     fun bookHistory(@PathVariable id: Int): List<BorrowedBook> {
         println("book history for $id")
-        return borrowedBooksRepository.findAllByBookId(id)
+        return borrowedBooksRepository.findAllByBookIdOrderByBorrowDateDesc(id)
+    }
+
+    @GetMapping("/{id}/reserved")
+    fun bookReservations(@PathVariable id: Int): List<ReservedBook> {
+        println("book reservations for $id")
+        return reservedBooksRepository.getAllByBookIdOrderByReservationDateAsc(id)
     }
 
     @GetMapping("/{id}/hands")

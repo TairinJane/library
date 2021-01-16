@@ -23,6 +23,7 @@ import { EventsSearch } from './components/events/events-search';
 import { AuthorsSearch } from './components/authors/author-search';
 import { NewAuthor } from './components/authors/new-author';
 import { AuthorProfile } from './components/authors/profile';
+import { BookProfile } from './components/books/profile';
 
 const App = () => {
   const store = configureStore();
@@ -35,6 +36,7 @@ const App = () => {
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route exact path="/books" component={BooksSearchPage} />
+              <Route exact path="/books/:id" component={BookProfile} />
               <Route exact path="/books/lend" component={LendPage} />
               <Route exact path="/books/due" component={DuePage} />
               <Route exact path="/purchases" component={PurchasesSearchPage} />

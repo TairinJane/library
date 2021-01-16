@@ -1,6 +1,6 @@
 import { stringify } from 'query-string';
 import { toApiURL } from '../utils/api.utils';
-import { TBook, TBorrowedBook } from '../store/store';
+import { TBook, TBorrowedBook, TReservedBook } from '../store/store';
 
 const getBooks = async (title?: string, authorFirstName?: string, authorLastName?: string): Promise<TBook[]> => {
   const request = { title, authorFirstName, authorLastName };
@@ -22,8 +22,29 @@ const fetchDueBooks = async (): Promise<TBorrowedBook[]> => {
   else throw Error(resp.statusText);
 };
 
+const getBookInfo = async (bookId: number): Promise<TBook> => {
+  const resp = await fetch(toApiURL(`/books/${bookId}`));
+  if (resp.ok) return await resp.json();
+  else throw Error(resp.statusText);
+};
+
+const getHistory = async (booksId: number): Promise<TBorrowedBook[]> => {
+  const resp = await fetch(toApiURL(`/books/${booksId}/history`));
+  if (resp.ok) return await resp.json();
+  else throw Error(resp.statusText);
+};
+
+const getReserved = async (booksId: number): Promise<TReservedBook[]> => {
+  const resp = await fetch(toApiURL(`/books/${booksId}/reserved`));
+  if (resp.ok) return await resp.json();
+  else throw Error(resp.statusText);
+};
+
 export const BooksApi = {
   getBooks,
   lendBook,
   fetchDueBooks,
+  getBookInfo,
+  getHistory,
+  getReserved,
 };
