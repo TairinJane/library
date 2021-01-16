@@ -1,7 +1,7 @@
 import { Grid } from '@material-ui/core';
 import { Button, InputGroup } from '@blueprintjs/core';
 import React, { useCallback, useState } from 'react';
-import { BooksThunks } from '../../actions/books.thunks';
+import { BooksThunks } from '../../actions/books/books.thunks';
 import { useDispatch } from 'react-redux';
 import { capitalize } from '../../utils/utils';
 

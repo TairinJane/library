@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TPurchase, TStore } from '../../store/store';
 import { PurchasesTable } from './purchases-table';
-import { PurchasesThunks } from '../../actions/purchases.thunks';
+import { PurchasesThunks } from '../../actions/purchases/purchases.thunks';
 import { TLoadableList } from '../../utils/state.utils';
 import { PurchasePopup } from './purchase-popup';
 

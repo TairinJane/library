@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { ReadersActions } from './readers.actions';
-import { ReadersApi } from '../api/readers.api';
+import { ReadersApi } from '../../api/readers.api';
 
 const findReaders = (firstName?: string, lastName?: string) => {
   return (dispatch: Dispatch) => {

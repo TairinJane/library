@@ -7,7 +7,7 @@ import { useHistory } from 'react-router';
 import { TPurchaseBook, TStore } from '../../store/store';
 import { TLoadable } from '../../utils/state.utils';
 import { BookInput } from './book-input';
-import { PurchasesThunks } from '../../actions/purchases.thunks';
+import { PurchasesThunks } from '../../actions/purchases/purchases.thunks';
 
 const emptyBook: TPurchaseBook = { isbn: '', amount: 1 };
 

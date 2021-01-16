@@ -1,5 +1,5 @@
 import { createAction, createAsyncAction } from 'typesafe-actions';
-import { TBook, TBorrowedBook } from '../store/store';
+import { TBook, TBorrowedBook } from '../../store/store';
 
 type TBooksMeta = { title?: string; authorFirstName?: string; authorLastName?: string };
 

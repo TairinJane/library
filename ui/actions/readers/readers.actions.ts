@@ -1,4 +1,4 @@
-import { TBorrowedBook, TReader } from '../store/store';
+import { TBorrowedBook, TReader } from '../../store/store';
 import { createAction, createAsyncAction } from 'typesafe-actions';
 
 type TReadersMeta = { firstName?: string; lastName?: string };

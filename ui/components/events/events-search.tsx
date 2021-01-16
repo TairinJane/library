@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TEvent, TStore } from '../../store/store';
 import { TLoadableList } from '../../utils/state.utils';
-import { EventsThunks } from '../../actions/events.thunks';
+import { EventsThunks } from '../../actions/events/events.thunks';
 import { EventsTable } from './events-table';
 
 export const EventsSearch = () => {

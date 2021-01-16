@@ -3,8 +3,8 @@ import { HistoryTable } from '../tables/history-table';
 import { TBorrowedBook, TDueBooks, TStore } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { Alert } from '@blueprintjs/core';
-import { BooksThunks } from '../../actions/books.thunks';
-import { ReadersThunks } from '../../actions/readers.thunks';
+import { BooksThunks } from '../../actions/books/books.thunks';
+import { ReadersThunks } from '../../actions/readers/readers.thunks';
 
 export const DuePage = () => {
   const dispatch = useDispatch();

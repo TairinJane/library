@@ -6,7 +6,7 @@ import { DateInput } from '@blueprintjs/datetime';
 import { useHistory } from 'react-router';
 import { TStore } from '../../store/store';
 import { TLoadable } from '../../utils/state.utils';
-import { EventsThunks } from '../../actions/events.thunks';
+import { EventsThunks } from '../../actions/events/events.thunks';
 
 export const NewEvent = () => {
   const dispatch = useDispatch();

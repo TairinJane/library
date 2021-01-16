@@ -8,7 +8,7 @@ import { ReadersTable } from '../tables/readers-table';
 import { Grid } from '@material-ui/core';
 import { Button } from '@blueprintjs/core';
 import { useHistory } from 'react-router';
-import { BooksThunks } from '../../actions/books.thunks';
+import { BooksThunks } from '../../actions/books/books.thunks';
 
 export const LendPage = () => {
   const dispatch = useDispatch();

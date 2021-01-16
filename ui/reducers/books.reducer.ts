@@ -1,5 +1,5 @@
 import { ActionType, getType } from 'typesafe-actions';
-import { BookActions } from '../actions/books.actions';
+import { BookActions } from '../actions/books/books.actions';
 import { booksStoreDefaults, TBooksStore } from '../store/store';
 import produce from 'immer';
 

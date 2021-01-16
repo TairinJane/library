@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { BookActions } from './books.actions';
-import { BooksApi } from '../api/books.api';
+import { BooksApi } from '../../api/books.api';
 
 const findBooks = (title?: string, authorFirstName?: string, authorLastName?: string) => {
   return (dispatch: Dispatch) => {

@@ -1,7 +1,7 @@
 import { ActionType, getType } from 'typesafe-actions';
 import { purchasesStoreDefaults, TPurchasesStore } from '../store/store';
 import produce from 'immer';
-import { PurchasesActions } from '../actions/purchases.actions';
+import { PurchasesActions } from '../actions/purchases/purchases.actions';
 import { TLoadableState } from '../utils/state.utils';
 
 type TPurchasesActions = ActionType<typeof PurchasesActions>;

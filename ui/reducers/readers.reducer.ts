@@ -1,7 +1,7 @@
 import { ActionType, getType } from 'typesafe-actions';
 import { storeReadersDefaults, TReadersStore } from '../store/store';
 import produce from 'immer';
-import { ReadersActions } from '../actions/readers.actions';
+import { ReadersActions } from '../actions/readers/readers.actions';
 import { TLoadableState } from '../utils/state.utils';
 
 type TReadersActions = ActionType<typeof ReadersActions>;

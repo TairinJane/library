@@ -1,5 +1,5 @@
 import { createAsyncAction } from 'typesafe-actions';
-import { TEvent } from '../store/store';
+import { TEvent } from '../../store/store';
 
 const getEvents = createAsyncAction('EVENTS/SEARCH_REQ', 'EVENTS/SEARCH_SUCCESS', 'EVENTS/SEARCH_ERROR')<
   [undefined, undefined],

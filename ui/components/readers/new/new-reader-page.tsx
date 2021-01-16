@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import { Button, InputGroup } from '@blueprintjs/core';
 import { DateInput } from '@blueprintjs/datetime';
-import { ReadersThunks } from '../../../actions/readers.thunks';
+import { ReadersThunks } from '../../../actions/readers/readers.thunks';
 import { TStore } from '../../../store/store';
 import { TLoadable } from '../../../utils/state.utils';
-import { ReadersActions } from '../../../actions/readers.actions';
+import { ReadersActions } from '../../../actions/readers/readers.actions';
 import { useHistory } from 'react-router';
 
 export const NewReaderPage = () => {

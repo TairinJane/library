@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
-import { PurchasesApi } from '../api/purchases.api';
+import { PurchasesApi } from '../../api/purchases.api';
 import { PurchasesActions } from './purchases.actions';
-import { TPurchase } from '../store/store';
+import { TPurchase } from '../../store/store';
 
 const getPurchases = () => {
   return (dispatch: Dispatch) => {

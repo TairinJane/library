@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
-import { TEvent } from '../store/store';
+import { TEvent } from '../../store/store';
 import { EventsActions } from './events.actions';
-import { EventsApi } from '../api/events.api';
+import { EventsApi } from '../../api/events.api';
 
 const getEvents = () => {
   return (dispatch: Dispatch) => {

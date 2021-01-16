@@ -1,7 +1,7 @@
 import { ActionType, getType } from 'typesafe-actions';
 import { eventsStoreDefaults, TEventsStore } from '../store/store';
 import produce from 'immer';
-import { EventsActions } from '../actions/events.actions';
+import { EventsActions } from '../actions/events/events.actions';
 import { TLoadableState } from '../utils/state.utils';
 
 type TEventsActions = ActionType<typeof EventsActions>;

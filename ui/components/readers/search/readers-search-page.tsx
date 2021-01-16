@@ -4,7 +4,7 @@ import { TReader, TStore } from '../../../store/store';
 import { ReadersTable } from '../../tables/readers-table';
 import { useHistory } from 'react-router';
 import { ReadersSearchControls } from './readers-search-controls';
-import { ReadersActions } from '../../../actions/readers.actions';
+import { ReadersActions } from '../../../actions/readers/readers.actions';
 
 export const ReadersSearchPage = () => {
   const history = useHistory();
