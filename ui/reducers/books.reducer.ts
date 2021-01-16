@@ -45,7 +45,7 @@ export const booksReducer = (state = booksStoreDefaults, action: TSearchActions)
         draft.profiles[action.payload.id] = {
           ...state.profiles[action.payload.id],
           info: {
-            ...TLoadableState.DEFAULT,
+            ...TLoadableState.SUCCESS,
             book: action.payload,
           },
         };

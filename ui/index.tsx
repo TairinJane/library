@@ -23,7 +23,7 @@ import { EventsSearch } from './components/events/events-search';
 import { AuthorsSearch } from './components/authors/author-search';
 import { NewAuthor } from './components/authors/new-author';
 import { AuthorProfile } from './components/authors/profile';
-import { BookProfile } from './components/books/profile';
+import { BookProfile } from './components/books/profile/profile';
 
 const App = () => {
   const store = configureStore();
