@@ -77,6 +77,24 @@ export const booksReducer = (state = booksStoreDefaults, action: TSearchActions)
           ...state.profiles[action.payload],
           history: { ...TLoadableState.ERROR, entities: [] },
         };
+        break;
+      case getType(BookActions.getReserved.request):
+        draft.profiles[action.payload] = {
+          ...state.profiles[action.payload],
+          reserved: { ...TLoadableState.SUCCESS, entities: [] },
+        };
+        break;
+      case getType(BookActions.getReserved.success):
+        draft.profiles[action.meta] = {
+          ...state.profiles[action.meta],
+          reserved: { ...TLoadableState.SUCCESS, entities: action.payload },
+        };
+        break;
+      case getType(BookActions.getReserved.failure):
+        draft.profiles[action.payload] = {
+          ...state.profiles[action.payload],
+          reserved: { ...TLoadableState.ERROR, entities: [] },
+        };
     }
   });
 };

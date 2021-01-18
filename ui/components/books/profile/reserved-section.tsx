@@ -15,8 +15,8 @@ export const ReservedSection = ({ bookId }: Props) => {
     useSelector<TStore, TLoadableList<TReservedBook>>(store => store.books.profiles[bookId]?.reserved) || {};
 
   useEffect(() => {
-    if (!reservations) dispatch(BooksThunks.getReserved(bookId));
-  }, [reservations, bookId]);
+    if (!reservations && !isLoaded) dispatch(BooksThunks.getReserved(bookId));
+  }, [reservations, bookId, isLoaded]);
 
   return (
     <>
