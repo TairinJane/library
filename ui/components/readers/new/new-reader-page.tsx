@@ -68,6 +68,7 @@ export const NewReaderPage = () => {
             onChange={date => setDate(date)}
             parseDate={str => new Date(str)}
             placeholder={'DD.MM.YYYY'}
+            minDate={new Date(1900, 1)}
             maxDate={new Date()}
             value={date}
           />
