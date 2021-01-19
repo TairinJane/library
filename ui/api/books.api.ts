@@ -9,8 +9,8 @@ const getBooks = async (title?: string, authorFirstName?: string, authorLastName
   else throw Error(resp.statusText);
 };
 
-const lendBook = async (readerId: number, bookId: number, employeeId = 30): Promise<null> => {
-  const request = { readerId, bookId, employeeId };
+const lendBook = async (readerId: number, bookId: number, dueDate: Date): Promise<null> => {
+  const request = { readerId, bookId, dueDate: dueDate.toLocaleDateString() };
   const resp = await fetch(toApiURL('/books/lend?') + stringify(request, { skipNull: true, skipEmptyString: true }));
   if (resp.ok) return await resp.json();
   else throw Error(resp.statusText);

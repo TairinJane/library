@@ -12,7 +12,7 @@ const findBooks = createAsyncAction('BOOKS/GET_BOOKS_REQ', 'BOOKS/GET_BOOKS_SUCC
 type TLendPayload = {
   readerId: number;
   bookId: number;
-  employeeId: number;
+  dueDate: Date;
 };
 
 const lendBook = createAsyncAction('LEND/LEND_REQ', 'LEND/LEND_SUCCESS', 'LEND/LEND_ERROR')<

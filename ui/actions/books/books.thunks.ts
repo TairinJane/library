@@ -12,11 +12,11 @@ const findBooks = (title?: string, authorFirstName?: string, authorLastName?: st
   };
 };
 
-const lendBook = (readerId: number, bookId: number, employeeId = 30) => {
+const lendBook = (readerId: number, bookId: number, dueDate: Date) => {
   return (dispatch: Dispatch) => {
-    const payload = { readerId, bookId, employeeId };
+    const payload = { readerId, bookId, dueDate };
     dispatch(BookActions.lendBook.request(payload));
-    return BooksApi.lendBook(readerId, bookId, employeeId)
+    return BooksApi.lendBook(readerId, bookId, dueDate)
       .then(json => dispatch(BookActions.lendBook.success(json, payload)))
       .catch(() => dispatch(BookActions.lendBook.failure(payload)));
   };

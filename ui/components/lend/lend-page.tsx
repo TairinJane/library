@@ -11,6 +11,8 @@ import { useHistory } from 'react-router';
 import { BooksThunks } from '../../actions/books/books.thunks';
 import { TLoadableList } from '../../utils/state.utils';
 import { BookActions } from '../../actions/books/books.actions';
+import { DateInput } from '@blueprintjs/datetime';
+import { personFullName } from '../../utils/title.utils';
 
 export const LendPage = () => {
   const dispatch = useDispatch();
@@ -27,6 +29,11 @@ export const LendPage = () => {
 
   const [pickedReader, setPickedReader] = useState<TReader>();
   const [pickedBook, setPickedBook] = useState<TBook>();
+  const [dueDate, setDueDate] = useState<Date>(() => {
+    const today = new Date();
+    today.setDate(today.getDate() + 10);
+    return today;
+  });
 
   useEffect(() => {
     if (isLendSuccess) {
@@ -51,9 +58,9 @@ export const LendPage = () => {
   );
 
   const onLend = useCallback(() => {
-    console.log('lend book:', pickedBook.title, pickedReader.firstName);
-    dispatch(BooksThunks.lendBook(pickedReader.id, pickedBook.id));
-  }, [pickedBook, pickedReader]);
+    console.log('lend book:', pickedBook.title, pickedReader.firstName, dueDate);
+    dispatch(BooksThunks.lendBook(pickedReader.id, pickedBook.id, dueDate));
+  }, [pickedBook, pickedReader, dueDate]);
 
   return (
     <>
@@ -61,7 +68,7 @@ export const LendPage = () => {
       <h2 className="bp3-heading offset-top-24">Pick Reader</h2>
       <div className="offset-top-12">
         {pickedReader ? (
-          `${pickedReader.firstName} ${pickedReader.lastName} ${pickedReader.patronymic ?? ''}`
+          personFullName(pickedReader)
         ) : (
           <>
             <ReadersSearchControls />
@@ -90,6 +97,15 @@ export const LendPage = () => {
           )}
         </>
       )}
+      <h2 className="bp3-heading offset-top-24">Due Date</h2>
+      <DateInput
+        formatDate={date => date.toLocaleDateString()}
+        onChange={date => setDueDate(date)}
+        parseDate={str => new Date(str)}
+        placeholder={'DD.MM.YYYY'}
+        minDate={new Date()}
+        value={dueDate}
+      />
       <Grid container justify={'flex-end'}>
         <Grid item xs>
           <Button disabled={!pickedBook || !pickedReader} intent={'primary'} className="offset-top-24" onClick={onLend}>
