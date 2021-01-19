@@ -82,7 +82,7 @@ export const LendPage = () => {
         <>
           <BooksSearchInputs />
           {!!books?.length && isBooksLoaded ? (
-            <BooksTable books={books} onRowClick={onBookSelect} lendPage />
+            <BooksTable books={books} onRowClick={onBookSelect} markUnavailable />
           ) : (
             <div className="offset-top-24 text-center">
               {isBooksFetching ? 'Books are loading...' : 'No books found'}
