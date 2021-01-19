@@ -29,11 +29,13 @@ export const readersReducer = (state = readersStoreDefaults, action: TReadersAct
       case getType(ReadersActions.getReaderInfo.failure):
         break;
       case getType(ReadersActions.findReaders.request):
+        draft.search = { ...TLoadableState.REQUEST, entities: [] };
         break;
       case getType(ReadersActions.findReaders.success):
-        draft.search = action.payload;
+        draft.search = { ...TLoadableState.SUCCESS, entities: action.payload };
         break;
       case getType(ReadersActions.findReaders.failure):
+        draft.search = { ...TLoadableState.ERROR, entities: [] };
         break;
       case getType(ReadersActions.returnBook.request):
         break;

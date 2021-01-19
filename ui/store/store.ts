@@ -132,13 +132,13 @@ export type TReaderInfo = {
 };
 
 export type TReadersStore = {
-  search: TReader[];
+  search: TLoadableList<TReader>;
   profiles: Record<number, TReaderInfo>;
   add: TLoadable;
 };
 
 export const readersStoreDefaults: TReadersStore = {
-  search: [],
+  search: defaultLoadableList(),
   add: TLoadableState.DEFAULT,
   profiles: {},
 };

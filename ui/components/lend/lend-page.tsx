@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TBook, TBooksStore, TReader, TReadersStore, TStore } from '../../store/store';
+import { TBook, TReader, TStore } from '../../store/store';
 import { BooksTable } from '../tables/books-table';
 import { BooksSearchInputs } from '../books/books-search-inputs';
 import { ReadersSearchControls } from '../readers/search/readers-search-controls';
@@ -9,13 +9,20 @@ import { Grid } from '@material-ui/core';
 import { Button } from '@blueprintjs/core';
 import { useHistory } from 'react-router';
 import { BooksThunks } from '../../actions/books/books.thunks';
+import { TLoadableList } from '../../utils/state.utils';
+import { BookActions } from '../../actions/books/books.actions';
 
 export const LendPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { search: readers } = useSelector<TStore, TReadersStore>(store => store.readers);
-  const { search: books } = useSelector<TStore, TBooksStore>(store => store.books);
+  const { entities: readers, isFetching, isLoaded } = useSelector<TStore, TLoadableList<TReader>>(
+    store => store.readers.search,
+  );
+  const { entities: books, isFetching: isBooksFetching, isLoaded: isBooksLoaded } = useSelector<
+    TStore,
+    TLoadableList<TBook>
+  >(store => store.books.search);
   const isLendSuccess = useSelector<TStore, boolean>(store => store.books.lend?.isSuccess) || false;
 
   const [pickedReader, setPickedReader] = useState<TReader>();
@@ -23,8 +30,7 @@ export const LendPage = () => {
 
   useEffect(() => {
     if (isLendSuccess) {
-      // dispatch(PurchasesActions.clearSearch());
-      // dispatch(LendActions.clearLendInfo());
+      dispatch(BookActions.clearLendInfo());
       history.push('/');
     }
   }, [isLendSuccess]);
@@ -59,10 +65,12 @@ export const LendPage = () => {
         ) : (
           <>
             <ReadersSearchControls />
-            {!!readers?.length ? (
+            {!!readers?.length && isLoaded ? (
               <ReadersTable readers={readers} onRowClick={onReaderSelect} />
             ) : (
-              <div className="offset-top-24 text-center">No results</div>
+              <div className="offset-top-24 text-center">
+                {isFetching ? 'Readers are loading...' : 'No readers found'}
+              </div>
             )}
           </>
         )}
@@ -73,10 +81,12 @@ export const LendPage = () => {
       ) : (
         <>
           <BooksSearchInputs />
-          {!!books?.length ? (
-            <BooksTable books={books} onRowClick={onBookSelect} />
+          {!!books?.length && isBooksLoaded ? (
+            <BooksTable books={books} onRowClick={onBookSelect} lendPage />
           ) : (
-            <div className="offset-top-24 text-center">No results</div>
+            <div className="offset-top-24 text-center">
+              {isBooksFetching ? 'Books are loading...' : 'No books found'}
+            </div>
           )}
         </>
       )}
