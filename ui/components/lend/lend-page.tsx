@@ -65,10 +65,15 @@ export const LendPage = () => {
   return (
     <>
       <h1 className="bp3-heading">Lend Book</h1>
-      <h2 className="bp3-heading offset-top-24">Pick Reader</h2>
+      <h2 className="bp3-heading offset-top-24">Reader</h2>
       <div className="offset-top-12">
         {pickedReader ? (
-          personFullName(pickedReader)
+          <Grid container justify={'space-between'}>
+            <Grid item>{personFullName(pickedReader)}</Grid>
+            <Grid item>
+              <Button onClick={() => setPickedReader(null)} icon={'trash'} />
+            </Grid>
+          </Grid>
         ) : (
           <>
             <ReadersSearchControls />
@@ -82,9 +87,14 @@ export const LendPage = () => {
           </>
         )}
       </div>
-      <h2 className="bp3-heading offset-top-24">Pick Book</h2>
+      <h2 className="bp3-heading offset-top-24">Book</h2>
       {pickedBook ? (
-        `${pickedBook.title}`
+        <Grid container justify={'space-between'}>
+          <Grid item>{pickedBook.title}</Grid>
+          <Grid item>
+            <Button onClick={() => setPickedBook(null)} icon={'trash'} />
+          </Grid>
+        </Grid>
       ) : (
         <>
           <BooksSearchInputs />
