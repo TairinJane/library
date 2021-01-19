@@ -113,14 +113,14 @@ export type TBookProfile = {
 };
 
 export type TBooksStore = {
-  search: TBook[];
+  search: TLoadableList<TBook>;
   lend: TLend;
   profiles: Record<number, TBookProfile>;
   due: TLoadableList<TBorrowedBook>;
 };
 
 export const booksStoreDefaults: TBooksStore = {
-  search: [],
+  search: defaultLoadableList(),
   lend: lendDefaults,
   profiles: {},
   due: defaultLoadableList(),

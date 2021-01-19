@@ -10,11 +10,13 @@ export const booksReducer = (state = booksStoreDefaults, action: TSearchActions)
   return produce(state, draft => {
     switch (action.type) {
       case getType(BookActions.findBooks.request):
+        draft.search = { ...TLoadableState.REQUEST, entities: [] };
         break;
       case getType(BookActions.findBooks.success):
-        draft.search = action.payload;
+        draft.search = { ...TLoadableState.SUCCESS, entities: action.payload };
         break;
       case getType(BookActions.findBooks.failure):
+        draft.search = { ...TLoadableState.ERROR, entities: [] };
         break;
       case getType(BookActions.lendBook.request):
         draft.lend = { ...action.payload };

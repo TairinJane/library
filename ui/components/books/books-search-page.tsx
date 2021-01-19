@@ -5,11 +5,14 @@ import { BooksTable } from '../tables/books-table';
 import { BooksSearchInputs } from './books-search-inputs';
 import { useHistory } from 'react-router';
 import { BookActions } from '../../actions/books/books.actions';
+import { TLoadableList } from '../../utils/state.utils';
 
 export const BooksSearchPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const books = useSelector<TStore, TBook[]>(store => store.books.search);
+  const { entities: books, isFetching, isLoaded } = useSelector<TStore, TLoadableList<TBook>>(
+    store => store.books.search,
+  );
 
   const onBookSelect = useCallback(
     (rowIndex: number) => {
@@ -24,10 +27,10 @@ export const BooksSearchPage = () => {
     <>
       <h1 className="bp3-heading offset-bottom-24">Books Search</h1>
       <BooksSearchInputs />
-      {!!books?.length ? (
+      {!!books?.length && isLoaded ? (
         <BooksTable books={books} onRowClick={onBookSelect} />
       ) : (
-        <div className="offset-top-24 text-center">No results</div>
+        <div className="offset-top-24 text-center">{isFetching ? 'Books are loading...' : 'No results'}</div>
       )}
     </>
   );
