@@ -9,7 +9,7 @@ type Props = {
   setOpen: (open: boolean) => void;
 };
 
-export const PurchasePopup = ({ isOpen, purchase, setOpen }: Props) => (
+export const PurchaseInfoPopup = ({ isOpen, purchase, setOpen }: Props) => (
   <Alert isOpen={isOpen} onClose={() => setOpen(false)} canOutsideClickCancel>
     <h4 className="bp3-heading">Purchase {purchase?.id}</h4>
     <div className="offset-top-12">

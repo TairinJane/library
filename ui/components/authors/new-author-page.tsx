@@ -8,7 +8,7 @@ import { TStore } from '../../store/store';
 import { TLoadable } from '../../utils/state.utils';
 import { AuthorsThunks } from '../../actions/authors/authors.thunks';
 
-export const NewAuthor = () => {
+export const NewAuthorPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { isFetching, isLoaded } = useSelector<TStore, TLoadable>(store => store.authors.add);

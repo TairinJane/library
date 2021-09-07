@@ -8,7 +8,7 @@ import { TStore } from '../../store/store';
 import { TLoadable } from '../../utils/state.utils';
 import { EventsThunks } from '../../actions/events/events.thunks';
 
-export const NewEvent = () => {
+export const NewEventPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { isFetching, isLoaded } = useSelector<TStore, TLoadable>(store => store.events.add);

@@ -17,11 +17,11 @@ import { HomePage } from './components/home/home-page';
 import { DuePage } from './components/due/due-page';
 import { NewReaderPage } from './components/readers/new/new-reader-page';
 import { PurchasesSearchPage } from './components/purchases/purchase-search';
-import { NewPurchase } from './components/purchases/new-purchase';
-import { NewEvent } from './components/events/new-event';
+import { NewPurchasePage } from './components/purchases/new-purchase-page';
+import { NewEventPage } from './components/events/new-event-page';
 import { EventsSearch } from './components/events/events-search';
 import { AuthorsSearch } from './components/authors/author-search';
-import { NewAuthor } from './components/authors/new-author';
+import { NewAuthorPage } from './components/authors/new-author-page';
 import { AuthorProfile } from './components/authors/profile';
 import { BookProfile } from './components/books/profile/profile';
 
@@ -40,14 +40,14 @@ const App = () => {
               <Route exact path="/books/:id" component={BookProfile} />
               <Route exact path="/books/due" component={DuePage} />
               <Route exact path="/purchases" component={PurchasesSearchPage} />
-              <Route exact path="/purchases/new" component={NewPurchase} />
+              <Route exact path="/purchases/new" component={NewPurchasePage} />
               <Route exact path="/readers" component={ReadersSearchPage} />
               <Route exact path="/readers/new" component={NewReaderPage} />
               <Route exact path="/readers/:id" component={ReaderProfile} />
               <Route exact path="/events" component={EventsSearch} />
-              <Route exact path="/events/new" component={NewEvent} />
+              <Route exact path="/events/new" component={NewEventPage} />
               <Route exact path="/authors" component={AuthorsSearch} />
-              <Route exact path="/authors/new" component={NewAuthor} />
+              <Route exact path="/authors/new" component={NewAuthorPage} />
               <Route exact path="/authors/:id" component={AuthorProfile} />
               <Route render={() => <div>No such page</div>} />
             </Switch>

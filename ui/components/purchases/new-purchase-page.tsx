@@ -11,7 +11,7 @@ import { PurchasesThunks } from '../../actions/purchases/purchases.thunks';
 
 const emptyBook: TPurchaseBook = { isbn: '', amount: 1 };
 
-export const NewPurchase = () => {
+export const NewPurchasePage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { isFetching, isLoaded } = useSelector<TStore, TLoadable>(store => store.purchases.add);

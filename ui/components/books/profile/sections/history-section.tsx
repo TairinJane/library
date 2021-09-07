@@ -1,9 +1,9 @@
-import { HistoryTable } from '../../tables/history-table';
+import { HistoryTable } from '../../../tables/history-table';
 import React, { useEffect, useMemo } from 'react';
-import { BooksThunks } from '../../../actions/books/books.thunks';
+import { BooksThunks } from '../../../../actions/books/books.thunks';
 import { useDispatch, useSelector } from 'react-redux';
-import { TBorrowedBook, TStore } from '../../../store/store';
-import { TLoadableList } from '../../../utils/state.utils';
+import { TBorrowedBook, TStore } from '../../../../store/store';
+import { TLoadableList } from '../../../../utils/state.utils';
 
 type Props = {
   bookId: number;

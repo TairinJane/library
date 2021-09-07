@@ -1,9 +1,9 @@
 import { Grid } from '@material-ui/core';
-import { personFullName } from '../../../utils/title.utils';
+import { personFullName } from '../../../../utils/title.utils';
 import React, { useEffect } from 'react';
-import { TBookInfo, TStore } from '../../../store/store';
+import { TBookInfo, TStore } from '../../../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { BooksThunks } from '../../../actions/books/books.thunks';
+import { BooksThunks } from '../../../../actions/books/books.thunks';
 
 type Props = {
   bookId: number;

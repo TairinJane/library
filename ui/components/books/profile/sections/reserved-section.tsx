@@ -1,9 +1,9 @@
-import { ReservationsTable } from '../../tables/reservations-table';
+import { ReservationsTable } from '../../../tables/reservations-table';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TReservedBook, TStore } from '../../../store/store';
-import { TLoadableList } from '../../../utils/state.utils';
-import { BooksThunks } from '../../../actions/books/books.thunks';
+import { TReservedBook, TStore } from '../../../../store/store';
+import { TLoadableList } from '../../../../utils/state.utils';
+import { BooksThunks } from '../../../../actions/books/books.thunks';
 
 type Props = {
   bookId: number;

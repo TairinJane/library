@@ -4,7 +4,7 @@ import { TPurchase, TStore } from '../../store/store';
 import { PurchasesTable } from './purchases-table';
 import { PurchasesThunks } from '../../actions/purchases/purchases.thunks';
 import { TLoadableList } from '../../utils/state.utils';
-import { PurchasePopup } from './purchase-popup';
+import { PurchaseInfoPopup } from './purchase-info-popup';
 
 export const PurchasesSearchPage = () => {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ export const PurchasesSearchPage = () => {
       ) : (
         <div className="offset-top-24 text-center">{isFetching ? 'Loading purchases...' : 'No results'}</div>
       )}
-      <PurchasePopup isOpen={isOpen} purchase={selectedPurchase} setOpen={setOpen} />
+      <PurchaseInfoPopup isOpen={isOpen} purchase={selectedPurchase} setOpen={setOpen} />
     </>
   );
 };
