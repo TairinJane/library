@@ -2,13 +2,13 @@ import React from 'react';
 import { Link, LinkProps } from 'react-router-dom';
 import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 
-type Props = {
+export type TNavBarLink = {
   icon?: React.ReactElement;
-  text: string;
+  title: string;
   to: string;
 };
 
-export const ListItemLink = ({ icon, text, to }: Props) => {
+export const ListItemLink = ({ icon, title, to }: TNavBarLink) => {
   const renderLink = React.useMemo(
     () => React.forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref) => <Link to={to} ref={ref} {...itemProps} />),
     [to],
@@ -18,7 +18,7 @@ export const ListItemLink = ({ icon, text, to }: Props) => {
     <li>
       <ListItem button component={renderLink} className="bp3-ui-text">
         {icon && <ListItemIcon>{icon}</ListItemIcon>}
-        <ListItemText primary={text} />
+        <ListItemText primary={title} />
       </ListItem>
     </li>
   );
