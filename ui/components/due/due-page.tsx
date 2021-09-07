@@ -1,15 +1,18 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { HistoryTable } from '../tables/history-table';
-import { TBorrowedBook, TDueBooks, TStore } from '../../store/store';
+import { TBorrowedBook, TStore } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { Alert } from '@blueprintjs/core';
 import { BooksThunks } from '../../actions/books/books.thunks';
 import { ReadersThunks } from '../../actions/readers/readers.thunks';
+import { TLoadableList } from '../../utils/state.utils';
 
 export const DuePage = () => {
   const dispatch = useDispatch();
 
-  const { books, isFetching, isError } = useSelector<TStore, TDueBooks>(store => store.books.due);
+  const { entities: books, isFetching, isError } = useSelector<TStore, TLoadableList<TBorrowedBook>>(
+    store => store.books.due,
+  );
 
   const [bookToReturn, setBookToReturn] = useState<TBorrowedBook>();
   const [isOpen, setOpen] = useState(false);

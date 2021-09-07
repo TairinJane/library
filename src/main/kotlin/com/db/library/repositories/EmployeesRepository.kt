@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository
 @Repository
 interface EmployeesRepository: JpaRepository<Employee, Int> {
     fun findAllByFirstName(firstName: String)
-    fun findAllByFirstNameAndLastName(firstName: String, lastName: String)
 }
